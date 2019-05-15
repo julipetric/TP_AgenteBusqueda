@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<idemia:AgentModel xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:idemia="utn.frsf.cidisi">
+  <Environment name="AmbienteAgenteCompras">
+    <EnvironmentState name="EstadoAmbiente">
+      <DataStructure name="preciosProductosComercios" type="matrix"/>
+      <DataStructure name="costoNafta" type="double"/>
+      <DataStructure name="costoTransportePublico" type="double"/>
+      <DataStructure name="imprevistosTiempo" type="matrix"/>
+      <DataStructure name="imprevistosDist" type="matrix"/>
+      <DataStructure name="ofertas" type="matrix"/>
+      <DataStructure name="imprevistosTiempoOrigen" type="matrix"/>
+      <DataStructure name="imprevistosDistOrigen" type="matrix"/>
+    </EnvironmentState>
+  </Environment>
+  <Agent name="AgenteCompras">
+    <Strategy xsi:type="idemia:Search" searchStrategy="BreathFirstSearch"/>
+    <Goal name="ObjetivoAgente" value="listaProductos=listaProductosDeseada"/>
+    <AgentState name="EstadoAgente">
+      <DataStructure name="listaProductos" type="matrix"/>
+      <DataStructure name="posicionActual"/>
+      <DataStructure name="mapaTiempo" type="matrix"/>
+      <DataStructure name="mapaDist" type="matrix"/>
+      <DataStructure name="tipoTransporte"/>
+      <DataStructure name="listaProductosDeseada" type="matrix"/>
+      <DataStructure name="recursoAPriorizar"/>
+      <DataStructure name="tiemposOrigen" type="matrix"/>
+      <DataStructure name="distanciasOrigen" type="matrix"/>
+    </AgentState>
+  </Agent>
+  <Actions execute_by="//@Agent" executed_on="//@Environment" name="Moverse"/>
+  <Actions execute_by="//@Agent" executed_on="//@Environment" name="Comprar"/>
+  <Perceptions perceived_on="//@Environment" perceived_by="//@Agent" name="imprevisto" type="boolean"/>
+  <Perceptions perceived_on="//@Environment" perceived_by="//@Agent" name="cambio en costos transporte"/>
+  <Perceptions perceived_on="//@Environment" perceived_by="//@Agent" name="ofertas"/>
+</idemia:AgentModel>
