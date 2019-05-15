@@ -15,13 +15,13 @@ import java.util.Vector;
 
 public class AgenteCompras extends SearchBasedAgent {
 
-    public AgenteCompras(int[] productosDeseados, int tipoTransporte) {
+    public AgenteCompras(int[] listaProductosDeseados, int tipoTransporte, int[][] tiemposOrigen, int[][] distOrigen, int recurso) {
 
         // The Agent Goal
         ObjetivoAgente agGoal = new ObjetivoAgente();
 
         // The Agent State
-        EstadoAgente agState = new EstadoAgente(productosDeseados, tipoTransporte);
+        EstadoAgente agState = new EstadoAgente(listaProductosDeseados, tipoTransporte, tiemposOrigen, distOrigen, recurso);
         this.setAgentState(agState);
 
         // Create the operators
