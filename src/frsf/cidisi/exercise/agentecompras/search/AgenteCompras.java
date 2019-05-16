@@ -11,11 +11,12 @@ import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.solver.search.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import java.util.ArrayList;
 import java.util.Vector;
 
 public class AgenteCompras extends SearchBasedAgent {
 
-    public AgenteCompras(int[] listaProductosDeseados, int tipoTransporte, int[][] tiemposOrigen, int[][] distOrigen, int recurso) {
+    public AgenteCompras(ArrayList<Integer> listaProductosDeseados, int tipoTransporte, int[][] tiemposOrigen, int[][] distOrigen, int recurso) {
 
         // The Agent Goal
         ObjetivoAgente agGoal = new ObjetivoAgente();

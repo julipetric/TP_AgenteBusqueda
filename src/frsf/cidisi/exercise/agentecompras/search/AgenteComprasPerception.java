@@ -6,19 +6,21 @@ import frsf.cidisi.faia.environment.Environment;
 
 public class AgenteComprasPerception extends Perception {
 
-	//TODO: Setup Statics
-    //public static int UNKNOWN_PERCEPTION = -1;   
+    public static int UNKNOWN_PERCEPTION = -1;   
 	
 	
-	//TODO: Setup Sensors
-	private boolean imprevisto;
-	private int cambio en costos transporte;
+	//Setup Sensors
+    //0 representa que no se perciben modificaciones, 1 que si hay modificaciones.
+	private int imprevisto;
+	private int cambioCostosTransporte;
 	private int ofertas;
 	
  
 
     public  AgenteComprasPerception() {
-    	//TODO: Complete Method
+    	imprevisto = UNKNOWN_PERCEPTION;
+    	cambioCostosTransporte = UNKNOWN_PERCEPTION;
+    	ofertas = UNKNOWN_PERCEPTION;
     }
 
     public AgenteComprasPerception(Agent agent, Environment environment) {
@@ -32,12 +34,9 @@ public class AgenteComprasPerception extends Perception {
     public void initPerception(Agent agentIn, Environment environmentIn) {
     	
     	//TODO: Complete Method
-        
         //AgenteCompras agent = (AgenteCompras) agentIn;
         //AmbienteAgenteCompras environment = (AmbienteAgenteCompras) environmentIn;
-        //EstadoAmbiente environmentState =
-        //        environment.getEnvironmentState();
-       
+        //EstadoAmbiente environmentState = environment.getEnvironmentState();
         
     }
     
@@ -53,17 +52,17 @@ public class AgenteComprasPerception extends Perception {
     // The following methods are agent-specific:
     //TODO: Complete this section with the agent-specific methods
 	
-     public boolean getimprevisto(){
+     public int getimprevisto(){
         return imprevisto;
      }
-     public void setimprevisto(boolean arg){
+     public void setimprevisto(int arg){
         this.imprevisto = arg;
      }
-     public int getcambio en costos transporte(){
-        return cambio en costos transporte;
+     public int get (){
+        return cambioCostosTransporte;
      }
-     public void setcambio en costos transporte(int arg){
-        this.cambio en costos transporte = arg;
+     public void setcambioCostosTransporte(int arg){
+        this.cambioCostosTransporte = arg;
      }
      public int getofertas(){
         return ofertas;

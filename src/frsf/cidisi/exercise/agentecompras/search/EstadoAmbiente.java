@@ -7,7 +7,6 @@ import frsf.cidisi.faia.state.EnvironmentState;
  */
 public class EstadoAmbiente extends EnvironmentState {
 	
-	//TODO: Setup Variables
     private int[][] preciosProductosComercios;
     private double costoNafta;
     private double costoTransportePublico;
@@ -19,17 +18,12 @@ public class EstadoAmbiente extends EnvironmentState {
 	
     public EstadoAmbiente() {
         
-        //TODO: Complete Method
-    	/*
-			// preciosProductosComercios = initData0;
-			// costoNafta = initData1;
-			// costoTransportePublico = initData2;
 			// imprevistosTiempo = initData3;
 			// imprevistosDist = initData4;
 			// ofertas = initData5;
 			// imprevistosTiempoOrigen = initData6;
 			// imprevistosDistOrigen = initData7;
-        */
+
         this.initState();
     }
 
@@ -39,7 +33,22 @@ public class EstadoAmbiente extends EnvironmentState {
     @Override
     public void initState() {
 
-        //TODO: Complete Method
+        //Estado inicial del estado del ambiente - Escenario de entrada.
+    	
+		preciosProductosComercios = new int[][] {
+    			{30, 70, 110, 20, 48, 188},
+    			{25, 66, 115, 22, 50, 183},
+    			{27, 80, 125, 18, 54, 170},
+    			{29, 81, 120, 25, 52, 190},
+    			{24, 75, 130, 22, 44, 179}
+    	};
+		
+		//Asumimos que está $45 el litro de nafta, y consideramos que se recorren 14km por litro consumido.
+		//Las distancias estan expresadas en metros, por lo que para calcular los costos de combustible se 
+		//multiplicará costoNafta por los metros recorridos.
+		costoNafta = 45/14000; 
+		costoTransportePublico = 0.5*costoNafta;
+    	
     }
 
     /**

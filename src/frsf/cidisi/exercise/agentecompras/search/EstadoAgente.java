@@ -17,13 +17,13 @@ public class EstadoAgente extends SearchBasedAgentState {
 	private int[][][] mapaTiempo;
 	private int[][][] mapaDist;
 	private int tipoTransporte;
-	private int[] listaProductosDeseados;
-	private int[] listaProductos;
+	private ArrayList<Integer> listaProductosDeseados;
+	private ArrayList<Integer> listaProductos;
 	private int recursoAPriorizar;
 	private int[][] tiemposOrigen;
 	private int[][] distanciasOrigen;
 
-	public EstadoAgente(int[] listaProductosDeseados, int tipoTransporte,
+	public EstadoAgente(ArrayList<Integer> listaProductosDeseados, int tipoTransporte,
 			int[][] tiemposOrigen, int[][] distOrigen, int recurso) {
 		this.initState();
 		this.setlistaProductosDeseados(listaProductosDeseados);
@@ -189,12 +189,16 @@ public class EstadoAgente extends SearchBasedAgentState {
 	public void settipoTransporte(int arg) {
 		tipoTransporte = arg;
 	}
+	
+	public ArrayList<Integer> getlistaProductos() {
+		return listaProductos;
+	}
 
-	public int[] getlistaProductosDeseados() {
+	public ArrayList<Integer> getlistaProductosDeseados() {
 		return listaProductosDeseados;
 	}
 
-	public void setlistaProductosDeseados(int[] arg) {
+	public void setlistaProductosDeseados(ArrayList<Integer> arg) {
 		listaProductosDeseados = arg;
 	}
 
