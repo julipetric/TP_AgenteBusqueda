@@ -2,7 +2,6 @@ package frsf.cidisi.exercise.agentecompras.search;
 
 import java.util.ArrayList;
 
-import frsf.cidisi.exercise.domain.Producto;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 
@@ -22,9 +21,16 @@ public class EstadoAgente extends SearchBasedAgentState {
 	private int recursoAPriorizar;
 	private int[][] tiemposOrigen;
 	private int[][] distanciasOrigen;
+	private double precioNafta;
+	private double precioTransportePublico;
+	private Double[][] preciosProductosComercios;
 
-	public EstadoAgente(ArrayList<Integer> listaProductosDeseados, int tipoTransporte,
-			int[][] tiemposOrigen, int[][] distOrigen, int recurso) {
+	public EstadoAgente() {
+
+	}
+
+	public EstadoAgente(ArrayList<Integer> listaProductosDeseados, int tipoTransporte, int[][] tiemposOrigen,
+			int[][] distOrigen, int recurso) {
 		this.initState();
 		this.setlistaProductosDeseados(listaProductosDeseados);
 		this.settipoTransporte(tipoTransporte);
@@ -34,20 +40,33 @@ public class EstadoAgente extends SearchBasedAgentState {
 	}
 
 	/**
-	 * This method clones the state of the agent. It's used in the search
-	 * process, when creating the search tree.
+	 * This method clones the state of the agent. It's used in the search process,
+	 * when creating the search tree.
 	 */
 	@Override
 	public SearchBasedAgentState clone() {
 
-		// TODO: Complete Method
+		EstadoAgente estado = new EstadoAgente();
 
-		return null;
+		estado.setlistaProductosDeseados(this.getlistaProductosDeseados());
+		estado.settipoTransporte(this.gettipoTransporte());
+		estado.settiemposOrigen(this.gettiemposOrigen());
+		estado.setdistanciasOrigen(this.getdistanciasOrigen());
+		estado.setrecursoAPriorizar(this.getrecursoAPriorizar());
+		estado.setlistaProductos(this.getlistaProductos());
+		estado.setmapaDist(this.getmapaDist());
+		estado.setmapaTiempo(this.getmapaTiempo());
+		estado.setposicionActual(this.getposicionActual());
+		estado.setprecioNafta(this.getprecioNafta());
+		estado.setprecioTransportePublico(this.getprecioTransportePublico());
+		estado.setpreciosProductosComercios(this.getpreciosProductosComercios());
+
+		return estado;
 	}
 
 	/**
-	 * This method is used to update the Agent State when a Perception is
-	 * received by the Simulator.
+	 * This method is used to update the Agent State when a Perception is received
+	 * by the Simulator.
 	 */
 	@Override
 	public void updateState(Perception p) {
@@ -59,71 +78,56 @@ public class EstadoAgente extends SearchBasedAgentState {
 	 * This method is optional, and sets the initial state of the agent.
 	 */
 	@Override
-    public void initState() {
-		int[][] mapaTiempoBici = new int[][] {
-        		{0,	4,	7,	7,	9},
-        		{4,	0,	2,	4,	7},
-        		{7,	2,	0,	2,	7},
-        		{7,	4,	2,	0,	4},
-        		{9,	7,	7,	4,	0}
-        		};
-		
-		int[][] mapaTiempoAuto = new int[][] {
-        		{0,	2,	3,	3,	4},
-        		{2,	0,	1,	2,	3},
-        		{3,	1,	0,	1,	3},
-        		{3,	2,	1,	0,	2},
-        		{4,	3,	3,	2,	0}
-        		};
-        
-        int[][] mapaTiempoCole = new int[][] {
-        		{0,	4,	6,	6,	8},
-        		{4,	0,	2,	4,	6},
-        		{6,	2,	0,	2,	6},
-        		{6,	4,	2,	0,	4},
-        		{8,	6,	6,	4,	0}
-        		};
-        
-        int[][][] mapaTiempo = new int[3][][];
-        
-        mapaTiempo[0] = mapaTiempoBici;
-        mapaTiempo[1] = mapaTiempoAuto;
-        mapaTiempo[2] = mapaTiempoCole;
-        
-        int[][] mapaDistBici = new int[][] {
-        		{0,	616,	924,	924,	1232},
-        		{616,	0,	308,	616,	924},
-        		{924,	308,	0,	308,	924},
-        		{924,	616,	308,	0,	616},
-        		{1232,	924,	924,	616,	0}
-        		};
-		
-		int[][] mapaDistAuto = new int[][] {
-        		{0,	480,	720,	720,	960},
-        		{480,	0,	240,	480,	720},
-        		{720,	240,	0,	240,	720},
-        		{720,	480,	240,	0,	480},
-        		{960,	720,	720,	480,	0}
-        		};
-        
-        int[][] mapaDistCole = new int[][] {
-        		{0,	840,	1260,	1260,	1680},
-        		{840,	0,	420,	840,	1260},
-        		{1260,	420,	0,	420,	1260},
-        		{1260,	840,	420,	0,	840},
-        		{1680,	1260,	1260,	840,	0}
-        		};
-        
-        int[][][] mapaDist = new int[3][][];
-        
-        mapaDist[0] = mapaDistBici;
-        mapaDist[1] = mapaDistAuto;
-        mapaDist[2] = mapaDistCole;
+	public void initState() {
+		int[][] mapaTiempoBici = new int[][] { { 0, 4, 7, 7, 9 }, { 4, 0, 2, 4, 7 }, { 7, 2, 0, 2, 7 },
+				{ 7, 4, 2, 0, 4 }, { 9, 7, 7, 4, 0 } };
 
-    	
-    	this.posicionActual = -1;
+		int[][] mapaTiempoAuto = new int[][] { { 0, 2, 3, 3, 4 }, { 2, 0, 1, 2, 3 }, { 3, 1, 0, 1, 3 },
+				{ 3, 2, 1, 0, 2 }, { 4, 3, 3, 2, 0 } };
 
-    }
+		int[][] mapaTiempoCole = new int[][] { { 0, 4, 6, 6, 8 }, { 4, 0, 2, 4, 6 }, { 6, 2, 0, 2, 6 },
+				{ 6, 4, 2, 0, 4 }, { 8, 6, 6, 4, 0 } };
+
+		mapaTiempo = new int[3][][];
+
+		mapaTiempo[0] = mapaTiempoBici;
+		mapaTiempo[1] = mapaTiempoAuto;
+		mapaTiempo[2] = mapaTiempoCole;
+
+		int[][] mapaDistBici = new int[][] { { 0, 616, 924, 924, 1232 }, { 616, 0, 308, 616, 924 },
+				{ 924, 308, 0, 308, 924 }, { 924, 616, 308, 0, 616 }, { 1232, 924, 924, 616, 0 } };
+
+		int[][] mapaDistAuto = new int[][] { { 0, 480, 720, 720, 960 }, { 480, 0, 240, 480, 720 },
+				{ 720, 240, 0, 240, 720 }, { 720, 480, 240, 0, 480 }, { 960, 720, 720, 480, 0 } };
+
+		int[][] mapaDistCole = new int[][] { { 0, 840, 1260, 1260, 1680 }, { 840, 0, 420, 840, 1260 },
+				{ 1260, 420, 0, 420, 1260 }, { 1260, 840, 420, 0, 840 }, { 1680, 1260, 1260, 840, 0 } };
+
+		mapaDist = new int[3][][];
+
+		mapaDist[0] = mapaDistBici;
+		mapaDist[1] = mapaDistAuto;
+		mapaDist[2] = mapaDistCole;
+
+		this.posicionActual = -1;
+
+		// Asumimos que está $45 el litro de nafta, y consideramos que se recorren 8km
+		// por litro consumido.
+		// Las distancias estan expresadas en metros, por lo que para calcular los
+		// costos de combustible se
+		// multiplicará costoNafta por los metros recorridos.
+		precioNafta = 45 / 8000;
+		precioTransportePublico = 0.5 * precioNafta;
+
+		preciosProductosComercios = new Double[][] { { 30.0, 70.0, 110.0, 20.0, Double.MAX_VALUE, 188.0 },
+				{ 25.0, 66.0, Double.MAX_VALUE, 22.0, 50.0, 183.0 },
+				{ 27.0, Double.MAX_VALUE, 125.0, 18.0, 54.0, 170.0 },
+				{ Double.MAX_VALUE, 81.0, 120.0, 25.0, 52.0, 190.0 },
+				{ 24.0, 75.0, 130.0, 22.0, 44.0, Double.MAX_VALUE } };
+
+		listaProductos = new ArrayList<Integer>();
+
+	}
 
 	/**
 	 * This method returns the String representation of the agent state.
@@ -144,20 +148,14 @@ public class EstadoAgente extends SearchBasedAgentState {
 	@Override
 	public boolean equals(Object obj) {
 
-		// TODO: Complete Method
+		boolean b1 = (this.getlistaProductos() == ((EstadoAgente) obj).getlistaProductos());
+		boolean b2 = (this.getposicionActual() == ((EstadoAgente) obj).getposicionActual());
+		boolean b = (b1 && b2);
 
-		return true;
+		return b;
 	}
 
-	// TODO: Complete this section with agent-specific methods
 	// The following methods are agent-specific:
-
-	// public Other getlistaProductos(){
-	// return listaProductos;
-	// }
-	// public void setlistaProductos(Other arg){
-	// listaProductos = arg;
-	// }
 	public int getposicionActual() {
 		return posicionActual;
 	}
@@ -189,9 +187,13 @@ public class EstadoAgente extends SearchBasedAgentState {
 	public void settipoTransporte(int arg) {
 		tipoTransporte = arg;
 	}
-	
+
 	public ArrayList<Integer> getlistaProductos() {
 		return listaProductos;
+	}
+
+	public void setlistaProductos(ArrayList<Integer> arg) {
+		listaProductos = arg;
 	}
 
 	public ArrayList<Integer> getlistaProductosDeseados() {
@@ -224,6 +226,30 @@ public class EstadoAgente extends SearchBasedAgentState {
 
 	public void setdistanciasOrigen(int[][] arg) {
 		distanciasOrigen = arg;
+	}
+
+	public double getprecioNafta() {
+		return precioNafta;
+	}
+
+	public void setprecioNafta(double arg) {
+		precioNafta = arg;
+	}
+
+	public double getprecioTransportePublico() {
+		return precioTransportePublico;
+	}
+
+	public void setprecioTransportePublico(double arg) {
+		precioTransportePublico = arg;
+	}
+
+	public Double[][] getpreciosProductosComercios() {
+		return preciosProductosComercios;
+	}
+
+	public void setpreciosProductosComercios(Double[][] arg) {
+		preciosProductosComercios = arg;
 	}
 
 }
