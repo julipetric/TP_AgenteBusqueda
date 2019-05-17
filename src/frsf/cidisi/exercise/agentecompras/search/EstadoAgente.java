@@ -61,7 +61,9 @@ public class EstadoAgente extends SearchBasedAgentState {
 		estado.setdistanciasOrigen(this.getdistanciasOrigen().clone());
 		estado.setrecursoAPriorizar(this.getrecursoAPriorizar());
 		
+		/*
 		estado.setlistaProductos((ArrayList<Integer>) this.getlistaProductos());
+		*/
 		
 		ArrayList<Integer> listaProd = new ArrayList<>();
 		listaProd.addAll(this.getlistaProductos());
@@ -159,7 +161,11 @@ public class EstadoAgente extends SearchBasedAgentState {
 	@Override
 	public boolean equals(Object obj) {
 
-		boolean b1 = (this.getlistaProductos() == ((EstadoAgente) obj).getlistaProductos());
+		//boolean b1 = (this.getlistaProductos().
+		ArrayList<Integer> aux1 = (ArrayList<Integer>) this.getlistaProductos().clone();
+		ArrayList<Integer> aux2 = (ArrayList<Integer>) ((EstadoAgente) obj).getlistaProductos().clone();
+		aux1.removeAll(aux2);
+		boolean b1 = aux1.isEmpty();
 		boolean b2 = (this.getposicionActual() == ((EstadoAgente) obj).getposicionActual());
 		boolean b = (b1 && b2);
 

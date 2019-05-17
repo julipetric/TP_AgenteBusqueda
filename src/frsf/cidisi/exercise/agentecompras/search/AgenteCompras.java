@@ -32,8 +32,7 @@ public class AgenteCompras extends SearchBasedAgent {
     	//Productos deseados: 1, 2 y 5
     	ArrayList<Integer> listaProductosDeseados = new ArrayList<Integer>();
     	listaProductosDeseados.add(1);
-    	listaProductosDeseados.add(2);
-    	listaProductosDeseados.add(5);
+    	listaProductosDeseados.add(0);
     	
     	//Transporte preferido: indefinido
     	int tipoTransporte = 0;
@@ -69,18 +68,21 @@ public class AgenteCompras extends SearchBasedAgent {
 
 		// Create the operators
 		Vector<SearchAction> operators = new Vector<SearchAction>();
+		
 		operators.addElement(new Moverse0());
 		operators.addElement(new Moverse1());
+		/*
 		operators.addElement(new Moverse2());
 		operators.addElement(new Moverse3());
 		operators.addElement(new Moverse4());
+		*/
 		operators.addElement(new Comprar00());
 		operators.addElement(new Comprar01());
+		/*
 		operators.addElement(new Comprar02());
 		operators.addElement(new Comprar03());
 		operators.addElement(new Comprar04());
 		operators.addElement(new Comprar05());
-		/*
 		operators.addElement(new Comprar10());
 		operators.addElement(new Comprar11());
 		operators.addElement(new Comprar12());
