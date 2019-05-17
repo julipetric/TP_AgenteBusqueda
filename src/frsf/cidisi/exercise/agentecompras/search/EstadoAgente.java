@@ -26,11 +26,18 @@ public class EstadoAgente extends SearchBasedAgentState {
 	private Double[][] preciosProductosComercios;
 
 	public EstadoAgente() {
-
+		mapaTiempo = new int[3][][];
+		mapaDist = new int[3][][];
+		listaProductos = new ArrayList<Integer>();
+		this.posicionActual = -1;
 	}
 
 	public EstadoAgente(ArrayList<Integer> listaProductosDeseados, int tipoTransporte, int[][] tiemposOrigen,
 			int[][] distOrigen, int recurso) {
+		mapaTiempo = new int[3][][];
+		mapaDist = new int[3][][];
+		listaProductos = new ArrayList<Integer>();
+		this.posicionActual = -1;
 		this.initState();
 		this.setlistaProductosDeseados(listaProductosDeseados);
 		this.settipoTransporte(tipoTransporte);
@@ -48,18 +55,25 @@ public class EstadoAgente extends SearchBasedAgentState {
 
 		EstadoAgente estado = new EstadoAgente();
 
-		estado.setlistaProductosDeseados(this.getlistaProductosDeseados());
+		estado.setlistaProductosDeseados((ArrayList<Integer>) this.getlistaProductosDeseados());
 		estado.settipoTransporte(this.gettipoTransporte());
-		estado.settiemposOrigen(this.gettiemposOrigen());
-		estado.setdistanciasOrigen(this.getdistanciasOrigen());
+		estado.settiemposOrigen(this.gettiemposOrigen().clone());
+		estado.setdistanciasOrigen(this.getdistanciasOrigen().clone());
 		estado.setrecursoAPriorizar(this.getrecursoAPriorizar());
-		estado.setlistaProductos(this.getlistaProductos());
-		estado.setmapaDist(this.getmapaDist());
-		estado.setmapaTiempo(this.getmapaTiempo());
+		
+		estado.setlistaProductos((ArrayList<Integer>) this.getlistaProductos());
+		
+		ArrayList<Integer> listaProd = new ArrayList<>();
+		listaProd.addAll(this.getlistaProductos());
+		estado.setlistaProductos(listaProd);
+		
+		
+		estado.setmapaDist(this.getmapaDist().clone());
+		estado.setmapaTiempo(this.getmapaTiempo().clone());
 		estado.setposicionActual(this.getposicionActual());
 		estado.setprecioNafta(this.getprecioNafta());
 		estado.setprecioTransportePublico(this.getprecioTransportePublico());
-		estado.setpreciosProductosComercios(this.getpreciosProductosComercios());
+		estado.setpreciosProductosComercios(this.getpreciosProductosComercios().clone());
 
 		return estado;
 	}
@@ -88,8 +102,6 @@ public class EstadoAgente extends SearchBasedAgentState {
 		int[][] mapaTiempoCole = new int[][] { { 0, 4, 6, 6, 8 }, { 4, 0, 2, 4, 6 }, { 6, 2, 0, 2, 6 },
 				{ 6, 4, 2, 0, 4 }, { 8, 6, 6, 4, 0 } };
 
-		mapaTiempo = new int[3][][];
-
 		mapaTiempo[0] = mapaTiempoBici;
 		mapaTiempo[1] = mapaTiempoAuto;
 		mapaTiempo[2] = mapaTiempoCole;
@@ -103,29 +115,25 @@ public class EstadoAgente extends SearchBasedAgentState {
 		int[][] mapaDistCole = new int[][] { { 0, 840, 1260, 1260, 1680 }, { 840, 0, 420, 840, 1260 },
 				{ 1260, 420, 0, 420, 1260 }, { 1260, 840, 420, 0, 840 }, { 1680, 1260, 1260, 840, 0 } };
 
-		mapaDist = new int[3][][];
 
 		mapaDist[0] = mapaDistBici;
 		mapaDist[1] = mapaDistAuto;
 		mapaDist[2] = mapaDistCole;
-
-		this.posicionActual = -1;
 
 		// Asumimos que está $45 el litro de nafta, y consideramos que se recorren 8km
 		// por litro consumido.
 		// Las distancias estan expresadas en metros, por lo que para calcular los
 		// costos de combustible se
 		// multiplicará costoNafta por los metros recorridos.
-		precioNafta = 45 / 8000;
+		precioNafta = 45 / 8; //8000
 		precioTransportePublico = 0.5 * precioNafta;
 
-		preciosProductosComercios = new Double[][] { { 30.0, 70.0, 110.0, 20.0, Double.MAX_VALUE, 188.0 },
+		preciosProductosComercios = new Double[][] { 
+				{ 30.0, 70.0, 110.0, 20.0, Double.MAX_VALUE, 188.0 },
 				{ 25.0, 66.0, Double.MAX_VALUE, 22.0, 50.0, 183.0 },
 				{ 27.0, Double.MAX_VALUE, 125.0, 18.0, 54.0, 170.0 },
 				{ Double.MAX_VALUE, 81.0, 120.0, 25.0, 52.0, 190.0 },
 				{ 24.0, 75.0, 130.0, 22.0, 44.0, Double.MAX_VALUE } };
-
-		listaProductos = new ArrayList<Integer>();
 
 	}
 
@@ -134,9 +142,12 @@ public class EstadoAgente extends SearchBasedAgentState {
 	 */
 	@Override
 	public String toString() {
-		String str = "";
-
-		// TODO: Complete Method
+		
+		String str = "\n";
+		str += "Posicion actual: ";
+		str += this.getposicionActual() + "\n";
+		str += "listaProductos: ";
+		str += this.getlistaProductos();
 
 		return str;
 	}

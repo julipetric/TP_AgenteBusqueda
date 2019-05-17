@@ -15,7 +15,7 @@ public class Comprar01 extends SearchAction {
 	 */
 	@Override
 	public SearchBasedAgentState execute(SearchBasedAgentState s) {
-		agState = (EstadoAgente) s;
+		EstadoAgente agState = (EstadoAgente) s;
 
 		// Preconditions
 		boolean p1 = (agState.getpreciosProductosComercios()[0][1] != Double.MAX_VALUE);
@@ -38,8 +38,6 @@ public class Comprar01 extends SearchAction {
 	@Override
 	public EnvironmentState execute(AgentState ast, EnvironmentState est) {
 		EstadoAmbiente environmentState = (EstadoAmbiente) est;
-		EstadoAgente agState = ((EstadoAgente) ast);
-
 		return environmentState;
 	}
 

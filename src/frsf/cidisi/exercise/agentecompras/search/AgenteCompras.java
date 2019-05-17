@@ -29,7 +29,7 @@ public class AgenteCompras extends SearchBasedAgent {
 	public AgenteCompras() {
 
 		//DEFINICION DE PARAMETROS INICIALES PARTICULARES DE UN CASO DE EJECUCION
-    	//Productos deseados: 2, 4 y 5
+    	//Productos deseados: 1, 2 y 5
     	ArrayList<Integer> listaProductosDeseados = new ArrayList<Integer>();
     	listaProductosDeseados.add(1);
     	listaProductosDeseados.add(2);
@@ -55,7 +55,7 @@ public class AgenteCompras extends SearchBasedAgent {
     	};
     	
     	//Definicion recurso a priorizar: costo mínimo total
-    	int recurso = 1;
+    	int recurso = 0;
     	//FIN DEFINICION PARAMETROS INCIALES
 		
 		
