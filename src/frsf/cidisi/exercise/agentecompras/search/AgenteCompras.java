@@ -27,58 +27,23 @@ import frsf.cidisi.faia.solver.search.Search;
 public class AgenteCompras extends SearchBasedAgent {
 
 	public AgenteCompras() {
+		// Robot agent goal
+		ObjetivoAgente goal = new ObjetivoAgente();
 
-		//DEFINICION DE PARAMETROS INICIALES PARTICULARES DE UN CASO DE EJECUCION
-    	//Productos deseados: 1, 2 y 5
-    	ArrayList<Integer> listaProductosDeseados = new ArrayList<Integer>();
-    	listaProductosDeseados.add(1);
-    	listaProductosDeseados.add(0);
-    	
-    	//Transporte preferido: indefinido
-    	int tipoTransporte = 0;
-    	
-    	//Matriz con los tiempos que lleva llegar del origen propuesto a cada uno de los destinos 
-    	//en bici, auto y transporte publico
-    	int [][] tiemposOrigen = new int[][] {
-    			{2,	4,	4,	4,	7},
-    			{1,	2,	2,	2,	3},
-    			{2,	4,	4,	4,	6}
-    	};
-    	
-    	//Matriz para las distancias que representa moverse del origen propuesto a cada uno de los destinos 
-    	//en bici, auto y transporte publico
-    	int[][] distOrigen = new int[][] {
-    			{308,	616,	616,	616,	924},
-    			{240,	480,	480,	480,	720},
-    			{420,	840,	840,	840,	1260}
-    	};
-    	
-    	//Definicion recurso a priorizar: costo mínimo total
-    	int recurso = 0;
-    	//FIN DEFINICION PARAMETROS INCIALES
-		
-		
-		// The Agent Goal
-		ObjetivoAgente agGoal = new ObjetivoAgente();
+		// Robot agent state
+		EstadoAgente agentState = new EstadoAgente();
+		this.setAgentState(agentState);
 
-		// The Agent State
-		EstadoAgente agState = new EstadoAgente(listaProductosDeseados, tipoTransporte, tiemposOrigen, distOrigen,
-				recurso);
-		this.setAgentState(agState);
-
-		// Create the operators
+		// Robot agent actions
 		Vector<SearchAction> operators = new Vector<SearchAction>();
-		
+
 		operators.addElement(new Moverse0());
 		operators.addElement(new Moverse1());
-		/*
 		operators.addElement(new Moverse2());
 		operators.addElement(new Moverse3());
 		operators.addElement(new Moverse4());
-		*/
 		operators.addElement(new Comprar00());
 		operators.addElement(new Comprar01());
-		/*
 		operators.addElement(new Comprar02());
 		operators.addElement(new Comprar03());
 		operators.addElement(new Comprar04());
@@ -107,55 +72,40 @@ public class AgenteCompras extends SearchBasedAgent {
 		operators.addElement(new Comprar43());
 		operators.addElement(new Comprar44());
 		operators.addElement(new Comprar45());
-		*/
 
-		// Create the Problem which the agent will resolve
-		Problem problem = new Problem(agGoal, agState, operators);
+		// Robot agent problem
+		Problem problem = new Problem(goal, agentState, operators);
 		this.setProblem(problem);
 	}
 
-	/**
-	 * This method is executed by the simulator to ask the agent for an action.
-	 */
 	@Override
 	public Action selectAction() {
+		// Breath first strategy
+		BreathFirstSearch searchStrategy = new BreathFirstSearch();
+//        DepthFirstSearch searchStrategy = new DepthFirstSearch();
 
-		// Create the search strategy
-		BreathFirstSearch strategy = new BreathFirstSearch();
+		Search searchSolver = new Search(searchStrategy);
 
-		// Create a Search object with the strategy
-		Search searchSolver = new Search(strategy);
-
-		/*
-		 * Generate an XML file with the search tree. It can also be generated in other
-		 * formats like PDF with PDF_TREE
-		 */
+		// Set the search tree to be written in an XML file
 		searchSolver.setVisibleTree(Search.EFAIA_TREE);
 
-		// Set the Search searchSolver.
+		// Set the search solver
 		this.setSolver(searchSolver);
 
-		// Ask the solver for the best action
+		// Run the actions selection process
 		Action selectedAction = null;
 		try {
 			selectedAction = this.getSolver().solve(new Object[] { this.getProblem() });
 		} catch (Exception ex) {
-			Logger.getLogger(AgenteCompras.class.getName()).log(Level.SEVERE, null, ex);
+			Logger.getLogger(EstadoAgente.class.getName()).log(Level.SEVERE, null, ex);
 		}
 
 		// Return the selected action
 		return selectedAction;
-
 	}
 
-	/**
-	 * This method is executed by the simulator to give the agent a perception. Then
-	 * it updates its state.
-	 * 
-	 * @param p
-	 */
 	@Override
-	public void see(Perception p) {
-		this.getAgentState().updateState(p);
+	public void see(Perception perception) {
+		this.getAgentState().updateState(perception);
 	}
 }
