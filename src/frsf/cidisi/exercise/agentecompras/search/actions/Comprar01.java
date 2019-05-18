@@ -71,6 +71,6 @@ public class Comprar01 extends SearchAction {
 	 */
 	@Override
 	public String toString() {
-		return "Comprar";
+		return "Comprar01";
 	}
 }

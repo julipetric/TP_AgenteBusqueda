@@ -17,6 +17,7 @@ public class Moverse1 extends SearchAction {
 	@Override
 	public SearchBasedAgentState execute(SearchBasedAgentState s) {
 		EstadoAgente agState = (EstadoAgente) s;
+		this.agState = (EstadoAgente) s;
 
 		// PreConditions
 		boolean p = (agState.getposicionActual() != 1);
@@ -173,6 +174,6 @@ public class Moverse1 extends SearchAction {
 	 */
 	@Override
 	public String toString() {
-		return "Moverse";
+		return "Moverse1";
 	}
 }

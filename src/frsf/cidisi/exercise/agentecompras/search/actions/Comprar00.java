@@ -73,6 +73,6 @@ public class Comprar00 extends SearchAction {
 	 */
 	@Override
 	public String toString() {
-		return "Comprar";
+		return "Comprar00";
 	}
 }
