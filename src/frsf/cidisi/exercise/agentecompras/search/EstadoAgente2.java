@@ -29,22 +29,17 @@ public class EstadoAgente2 extends SearchBasedAgentState {
 		mapaTiempo = new int[3][][];
 		mapaDist = new int[3][][];
 		listaProductos = new ArrayList<Integer>();
-		this.posicionActual = -1;
-	}
-
-	public EstadoAgente2(ArrayList<Integer> listaProductosDeseados, int tipoTransporte, int[][] tiemposOrigen,
-			int[][] distOrigen, int recurso) {
-		mapaTiempo = new int[3][][];
-		mapaDist = new int[3][][];
-		listaProductos = new ArrayList<Integer>();
-		this.posicionActual = -1;
 		this.initState();
-		this.setlistaProductosDeseados(listaProductosDeseados);
-		this.settipoTransporte(tipoTransporte);
-		this.settiemposOrigen(tiemposOrigen);
-		this.setdistanciasOrigen(distOrigen);
-		this.setrecursoAPriorizar(recurso);
 	}
+	/*
+	 * public EstadoAgente(ArrayList<Integer> listaProductosDeseados, int
+	 * tipoTransporte, int[][] tiemposOrigen, int[][] distOrigen, int recurso) {
+	 * mapaTiempo = new int[3][][]; mapaDist = new int[3][][]; listaProductos = new
+	 * ArrayList<Integer>(); this.posicionActual = -1; this.initState();
+	 * this.setlistaProductosDeseados(listaProductosDeseados);
+	 * this.settipoTransporte(tipoTransporte); this.settiemposOrigen(tiemposOrigen);
+	 * this.setdistanciasOrigen(distOrigen); this.setrecursoAPriorizar(recurso); }
+	 */
 
 	/**
 	 * This method clones the state of the agent. It's used in the search process,
@@ -55,21 +50,20 @@ public class EstadoAgente2 extends SearchBasedAgentState {
 
 		EstadoAgente2 estado = new EstadoAgente2();
 
-		estado.setlistaProductosDeseados((ArrayList<Integer>) this.getlistaProductosDeseados());
+		estado.setlistaProductosDeseados((ArrayList<Integer>) this.getlistaProductosDeseados().clone());
 		estado.settipoTransporte(this.gettipoTransporte());
 		estado.settiemposOrigen(this.gettiemposOrigen().clone());
 		estado.setdistanciasOrigen(this.getdistanciasOrigen().clone());
 		estado.setrecursoAPriorizar(this.getrecursoAPriorizar());
-		
+
 		/*
-		estado.setlistaProductos((ArrayList<Integer>) this.getlistaProductos());
-		*/
-		
+		 * estado.setlistaProductos((ArrayList<Integer>) this.getlistaProductos());
+		 */
+
 		ArrayList<Integer> listaProd = new ArrayList<>();
 		listaProd.addAll(this.getlistaProductos());
 		estado.setlistaProductos(listaProd);
-		
-		
+
 		estado.setmapaDist(this.getmapaDist().clone());
 		estado.setmapaTiempo(this.getmapaTiempo().clone());
 		estado.setposicionActual(this.getposicionActual());
@@ -87,7 +81,7 @@ public class EstadoAgente2 extends SearchBasedAgentState {
 	@Override
 	public void updateState(Perception p) {
 
-		// TODO: Complete Method
+		// TODO: VER QUE ONDA ACÁ SI PUEDE ESTAR VACÍO
 	}
 
 	/**
@@ -95,6 +89,32 @@ public class EstadoAgente2 extends SearchBasedAgentState {
 	 */
 	@Override
 	public void initState() {
+		// DEFINICION DE PARAMETROS INICIALES PARTICULARES DE UN CASO DE EJECUCION
+		// Productos deseados: 1, 2 y 5
+		listaProductosDeseados = new ArrayList<Integer>();
+		listaProductosDeseados.add(1);
+		listaProductosDeseados.add(0);
+
+		// Transporte preferido: indefinido
+		tipoTransporte = 0;
+
+		// Matriz con los tiempos que lleva llegar del origen propuesto a cada uno de
+		// los destinos
+		// en bici, auto y transporte publico
+		tiemposOrigen = new int[][] { { 2, 4, 4, 4, 7 }, { 1, 2, 2, 2, 3 }, { 2, 4, 4, 4, 6 } };
+
+		// Matriz para las distancias que representa moverse del origen propuesto a cada
+		// uno de los destinos
+		// en bici, auto y transporte publico
+		distanciasOrigen = new int[][] { { 308, 616, 616, 616, 924 }, { 240, 480, 480, 480, 720 },
+				{ 420, 840, 840, 840, 1260 } };
+
+		// Definicion recurso a priorizar: costo mínimo total
+		recursoAPriorizar = 0;
+		// FIN DEFINICION PARAMETROS INCIALES
+
+		this.posicionActual = -1;
+
 		int[][] mapaTiempoBici = new int[][] { { 0, 4, 7, 7, 9 }, { 4, 0, 2, 4, 7 }, { 7, 2, 0, 2, 7 },
 				{ 7, 4, 2, 0, 4 }, { 9, 7, 7, 4, 0 } };
 
@@ -117,7 +137,6 @@ public class EstadoAgente2 extends SearchBasedAgentState {
 		int[][] mapaDistCole = new int[][] { { 0, 840, 1260, 1260, 1680 }, { 840, 0, 420, 840, 1260 },
 				{ 1260, 420, 0, 420, 1260 }, { 1260, 840, 420, 0, 840 }, { 1680, 1260, 1260, 840, 0 } };
 
-
 		mapaDist[0] = mapaDistBici;
 		mapaDist[1] = mapaDistAuto;
 		mapaDist[2] = mapaDistCole;
@@ -127,11 +146,10 @@ public class EstadoAgente2 extends SearchBasedAgentState {
 		// Las distancias estan expresadas en metros, por lo que para calcular los
 		// costos de combustible se
 		// multiplicará costoNafta por los metros recorridos.
-		precioNafta = 45 / 8; //8000
+		precioNafta = 45 / 8; // 8000
 		precioTransportePublico = 0.5 * precioNafta;
 
-		preciosProductosComercios = new Double[][] { 
-				{ 30.0, 70.0, 110.0, 20.0, Double.MAX_VALUE, 188.0 },
+		preciosProductosComercios = new Double[][] { { 30.0, 70.0, 110.0, 20.0, Double.MAX_VALUE, 188.0 },
 				{ 25.0, 66.0, Double.MAX_VALUE, 22.0, 50.0, 183.0 },
 				{ 27.0, Double.MAX_VALUE, 125.0, 18.0, 54.0, 170.0 },
 				{ Double.MAX_VALUE, 81.0, 120.0, 25.0, 52.0, 190.0 },
@@ -144,7 +162,7 @@ public class EstadoAgente2 extends SearchBasedAgentState {
 	 */
 	@Override
 	public String toString() {
-		
+
 		String str = "\n";
 		str += "Posicion actual: ";
 		str += this.getposicionActual() + "\n";
@@ -161,15 +179,20 @@ public class EstadoAgente2 extends SearchBasedAgentState {
 	@Override
 	public boolean equals(Object obj) {
 
-		//boolean b1 = (this.getlistaProductos().
-		ArrayList<Integer> aux1 = (ArrayList<Integer>) this.getlistaProductos().clone();
-		ArrayList<Integer> aux2 = (ArrayList<Integer>) ((EstadoAgente2) obj).getlistaProductos().clone();
-		aux1.removeAll(aux2);
-		boolean b1 = aux1.isEmpty();
-		boolean b2 = (this.getposicionActual() == ((EstadoAgente2) obj).getposicionActual());
-		boolean b = (b1 && b2);
+		if (!(obj instanceof EstadoAgente2)) {
+			return false;
+		} else {
+			// boolean b1 = (this.getlistaProductos().
+			ArrayList<Integer> aux1 = (ArrayList<Integer>) this.getlistaProductos().clone();
+			ArrayList<Integer> aux2 = (ArrayList<Integer>) ((EstadoAgente2) obj).getlistaProductos().clone();
+			aux1.removeAll(aux2);
+			boolean b1 = aux1.isEmpty();
+			boolean b2 = (this.getposicionActual() == ((EstadoAgente2) obj).getposicionActual());
+			boolean b = (b1 && b2);
 
-		return b;
+			return b;
+		}
+
 	}
 
 	// The following methods are agent-specific:

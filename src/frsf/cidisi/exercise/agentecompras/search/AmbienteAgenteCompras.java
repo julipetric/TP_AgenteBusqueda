@@ -34,7 +34,7 @@ public class AmbienteAgenteCompras extends Environment {
 
     
     public String toString() {
-        return environmentState.toString();
+        return ""; //environmentState.toString();
     }
 
     

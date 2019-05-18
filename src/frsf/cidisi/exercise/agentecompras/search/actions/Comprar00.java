@@ -37,10 +37,9 @@ public class Comprar00 extends SearchAction {
 	 */
 	@Override
 	public EnvironmentState execute(AgentState ast, EnvironmentState est) {
-		EstadoAmbiente environmentState = (EstadoAmbiente) est;
-		EstadoAgente agState = ((EstadoAgente) ast);
+		this.execute((SearchBasedAgentState) ast);
 
-		return environmentState;
+		return null;
 	}
 
 	/**

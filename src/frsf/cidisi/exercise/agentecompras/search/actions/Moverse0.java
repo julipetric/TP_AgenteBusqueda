@@ -7,9 +7,9 @@ import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
 public class Moverse0 extends SearchAction {
-
+	
 	EstadoAgente agState;
-
+	
 	/**
 	 * This method updates a tree node state when the search process is running. It
 	 * does not updates the real world state.
@@ -36,9 +36,9 @@ public class Moverse0 extends SearchAction {
 	 */
 	@Override
 	public EnvironmentState execute(AgentState ast, EnvironmentState est) {
-		EstadoAmbiente environmentState = (EstadoAmbiente) est;
+		this.execute((SearchBasedAgentState) ast);
 
-		return environmentState;
+		return null;
 	}
 
 	/**
