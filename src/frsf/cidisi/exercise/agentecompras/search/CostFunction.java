@@ -13,7 +13,7 @@ public class CostFunction implements IStepCostFunction {
 	 */
 	@Override
 	public double calculateCost(NTree node) {
-
+		
 		if(node.getParent() != null) {
 			if(node.getParent().getAction() == null) {
 				return 0;
@@ -25,5 +25,6 @@ public class CostFunction implements IStepCostFunction {
 		} else {
 			return node.getAction().getCost();
 		}
+
 	}
 }

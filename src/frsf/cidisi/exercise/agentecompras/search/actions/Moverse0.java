@@ -23,6 +23,7 @@ public class Moverse0 extends SearchAction {
 		boolean p = (agState.getposicionActual() != 0);
 
 		if (p) {
+			agState.setposicionPrevia(agState.getposicionActual());
 			agState.setposicionActual(0);
 
 			return agState;
@@ -46,9 +47,11 @@ public class Moverse0 extends SearchAction {
 	 */
 	@Override
 	public Double getCost() {
+		//System.out.println("LA POSIC ES: "+agState.getposicionActual());
 		Double t = null;
 		// Primero vemos que el agente no esté en el origen
-		if (agState.getposicionActual() != -1) {
+		if (agState.getposicionPrevia() != -1) {
+
 			// El costo de moverse depende del recurso a priorizar definido en el agente:
 			switch (agState.getrecursoAPriorizar()) {
 			// Tiempo
@@ -57,13 +60,13 @@ public class Moverse0 extends SearchAction {
 				switch (agState.gettipoTransporte()) {
 				// Bici
 				case 1:
-					t = (Double) (double) agState.getmapaTiempo()[0][agState.getposicionActual()][0];
+					t = (Double) (double) agState.getmapaTiempo()[0][agState.getposicionPrevia()][0];
 					break;
 				case 2:
-					t = (Double) (double) agState.getmapaTiempo()[1][agState.getposicionActual()][0];
+					t = (Double) (double) agState.getmapaTiempo()[1][agState.getposicionPrevia()][0];
 					break;
 				case 3:
-					t = (Double) (double) agState.getmapaTiempo()[2][agState.getposicionActual()][0];
+					t = (Double) (double) agState.getmapaTiempo()[2][agState.getposicionPrevia()][0];
 					break;
 				}
 				break;
@@ -76,11 +79,11 @@ public class Moverse0 extends SearchAction {
 					break;
 				// Auto
 				case 2:
-					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionActual()][0];
+					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionPrevia()][0];
 					t = t * agState.getprecioNafta();
 					break;
 				case 3:
-					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionActual()][0];
+					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionPrevia()][0];
 					t = t * agState.getprecioTransportePublico();
 					break;
 				}
@@ -94,19 +97,20 @@ public class Moverse0 extends SearchAction {
 					break;
 				// Auto
 				case 2:
-					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionActual()][0];
+					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionPrevia()][0];
 					t = t * agState.getprecioNafta();
-					t = t / (Double) (double) agState.getmapaTiempo()[1][agState.getposicionActual()][0];
+					t = t / (Double) (double) agState.getmapaTiempo()[1][agState.getposicionPrevia()][0];
 					break;
 				case 3:
-					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionActual()][0];
+					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionPrevia()][0];
 					t = t * agState.getprecioTransportePublico();
-					t = t / (Double) (double) agState.getmapaTiempo()[2][agState.getposicionActual()][0];
+					t = t / (Double) (double) agState.getmapaTiempo()[2][agState.getposicionPrevia()][0];
 					break;
 				}
 				break;
 			}
 		} else {
+
 			// El costo de moverse depende del recurso a priorizar definido en el agente:
 			switch (agState.getrecursoAPriorizar()) {
 			// Tiempo

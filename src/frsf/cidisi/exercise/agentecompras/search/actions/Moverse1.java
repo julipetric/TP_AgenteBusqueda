@@ -23,6 +23,7 @@ public class Moverse1 extends SearchAction {
 		boolean p = (agState.getposicionActual() != 1);
 
 		if (p) {
+			agState.setposicionPrevia(agState.getposicionActual());
 			agState.setposicionActual(1);
 
 			return agState;
@@ -48,7 +49,7 @@ public class Moverse1 extends SearchAction {
 	public Double getCost() {
 		Double t = null;
 		// Primero vemos que el agente no esté en el origen
-		if (agState.getposicionActual() != -1) {
+		if (agState.getposicionPrevia() != -1) {
 			// El costo de moverse depende del recurso a priorizar definido en el agente:
 			switch (agState.getrecursoAPriorizar()) {
 			// Tiempo
@@ -57,13 +58,13 @@ public class Moverse1 extends SearchAction {
 				switch (agState.gettipoTransporte()) {
 				// Bici
 				case 1:
-					t = (Double) (double) agState.getmapaTiempo()[0][agState.getposicionActual()][1];
+					t = (Double) (double) agState.getmapaTiempo()[0][agState.getposicionPrevia()][1];
 					break;
 				case 2:
-					t = (Double) (double) agState.getmapaTiempo()[1][agState.getposicionActual()][1];
+					t = (Double) (double) agState.getmapaTiempo()[1][agState.getposicionPrevia()][1];
 					break;
 				case 3:
-					t = (Double) (double) agState.getmapaTiempo()[2][agState.getposicionActual()][1];
+					t = (Double) (double) agState.getmapaTiempo()[2][agState.getposicionPrevia()][1];
 					break;
 				}
 				break;
@@ -76,11 +77,11 @@ public class Moverse1 extends SearchAction {
 					break;
 				// Auto
 				case 2:
-					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionActual()][1];
+					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionPrevia()][1];
 					t = t * agState.getprecioNafta();
 					break;
 				case 3:
-					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionActual()][1];
+					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionPrevia()][1];
 					t = t * agState.getprecioTransportePublico();
 					break;
 				}
@@ -94,14 +95,14 @@ public class Moverse1 extends SearchAction {
 					break;
 				// Auto
 				case 2:
-					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionActual()][1];
+					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionPrevia()][1];
 					t = t * agState.getprecioNafta();
-					t = t / (Double) (double) agState.getmapaTiempo()[1][agState.getposicionActual()][1];
+					t = t / (Double) (double) agState.getmapaTiempo()[1][agState.getposicionPrevia()][1];
 					break;
 				case 3:
-					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionActual()][1];
+					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionPrevia()][1];
 					t = t * agState.getprecioTransportePublico();
-					t = t / (Double) (double) agState.getmapaTiempo()[2][agState.getposicionActual()][1];
+					t = t / (Double) (double) agState.getmapaTiempo()[2][agState.getposicionPrevia()][1];
 					break;
 				}
 				break;

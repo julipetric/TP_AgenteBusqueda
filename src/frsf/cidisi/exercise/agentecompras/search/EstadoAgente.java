@@ -13,6 +13,7 @@ public class EstadoAgente extends SearchBasedAgentState {
 
 	// TODO: Setup Variables
 	// private Other listaProductos;
+	private int posicionPrevia;
 	private int posicionActual;
 	private int[][][] mapaTiempo;
 	private int[][][] mapaDist;
@@ -80,29 +81,60 @@ public class EstadoAgente extends SearchBasedAgentState {
 		mapaDist = new int[3][][];
 		listaProductos = new ArrayList<Integer>();
 
+		this.posicionPrevia = -1;
 		this.posicionActual = -1;
 
-		int[][] mapaTiempoBici = new int[][] { { 0, 4, 7, 7, 9 }, { 4, 0, 2, 4, 7 }, { 7, 2, 0, 2, 7 },
-				{ 7, 4, 2, 0, 4 }, { 9, 7, 7, 4, 0 } };
+		int[][] mapaTiempoBici = new int[][] 	{ 
+												{ 0, 4, 7, 7, 9 }, 
+												{ 4, 0, 2, 4, 7 },
+												{ 7, 2, 0, 2, 7 },
+												{ 7, 4, 2, 0, 4 }, 
+												{ 9, 7, 7, 4, 0 } 
+												};
 
-		int[][] mapaTiempoAuto = new int[][] { { 0, 2, 3, 3, 4 }, { 2, 0, 1, 2, 3 }, { 3, 1, 0, 1, 3 },
-				{ 3, 2, 1, 0, 2 }, { 4, 3, 3, 2, 0 } };
+		int[][] mapaTiempoAuto = new int[][] 	{ 
+												{ 0, 2, 3, 3, 4 }, 
+												{ 2, 0, 1, 2, 3 }, 
+												{ 3, 1, 0, 1, 3 },
+												{ 3, 2, 1, 0, 2 }, 
+												{ 4, 3, 3, 2, 0 } 
+												};
 
-		int[][] mapaTiempoCole = new int[][] { { 0, 4, 6, 6, 8 }, { 4, 0, 2, 4, 6 }, { 6, 2, 0, 2, 6 },
-				{ 6, 4, 2, 0, 4 }, { 8, 6, 6, 4, 0 } };
+		int[][] mapaTiempoCole = new int[][] 	{ 
+												{ 0, 4, 6, 6, 8 }, 
+												{ 4, 0, 2, 4, 6 }, 
+												{ 6, 2, 0, 2, 6 },
+												{ 6, 4, 2, 0, 4 }, 
+												{ 8, 6, 6, 4, 0 } 
+												};
 
 		mapaTiempo[0] = mapaTiempoBici;
 		mapaTiempo[1] = mapaTiempoAuto;
 		mapaTiempo[2] = mapaTiempoCole;
 
-		int[][] mapaDistBici = new int[][] { { 0, 616, 924, 924, 1232 }, { 616, 0, 308, 616, 924 },
-				{ 924, 308, 0, 308, 924 }, { 924, 616, 308, 0, 616 }, { 1232, 924, 924, 616, 0 } };
+		int[][] mapaDistBici = new int[][] 	{ 
+											{ 0, 616, 924, 924, 1232 }, 
+											{ 616, 0, 308, 616, 924 },
+											{ 924, 308, 0, 308, 924 }, 
+											{ 924, 616, 308, 0, 616 }, 
+											{ 1232, 924, 924, 616, 0 } 
+											};
 
-		int[][] mapaDistAuto = new int[][] { { 0, 480, 720, 720, 960 }, { 480, 0, 240, 480, 720 },
-				{ 720, 240, 0, 240, 720 }, { 720, 480, 240, 0, 480 }, { 960, 720, 720, 480, 0 } };
+		int[][] mapaDistAuto = new int[][] 	{ 
+											{ 0, 480, 720, 720, 960 }, 
+											{ 480, 0, 240, 480, 720 },
+											{ 720, 240, 0, 240, 720 }, 
+											{ 720, 480, 240, 0, 480 }, 
+											{ 960, 720, 720, 480, 0 } 
+											};
 
-		int[][] mapaDistCole = new int[][] { { 0, 840, 1260, 1260, 1680 }, { 840, 0, 420, 840, 1260 },
-				{ 1260, 420, 0, 420, 1260 }, { 1260, 840, 420, 0, 840 }, { 1680, 1260, 1260, 840, 0 } };
+		int[][] mapaDistCole = new int[][] 	{ 
+											{ 0, 840, 1260, 1260, 1680 }, 
+											{ 840, 0, 420, 840, 1260 },
+											{ 1260, 420, 0, 420, 1260 }, 
+											{ 1260, 840, 420, 0, 840 }, 
+											{ 1680, 1260, 1260, 840, 0 } 
+											};
 
 		mapaDist[0] = mapaDistBici;
 		mapaDist[1] = mapaDistAuto;
@@ -128,22 +160,29 @@ public class EstadoAgente extends SearchBasedAgentState {
 		listaProductosDeseados.add(1);
 		listaProductosDeseados.add(0);
 
-		// Transporte preferido: bici
-		tipoTransporte = 1;
+		// Transporte preferido: auto (2)
+		tipoTransporte = 2;
 
 		// Matriz con los tiempos que lleva llegar del origen propuesto a cada uno de
 		// los destinos
 		// en bici, auto y transporte publico
-		tiemposOrigen = new int[][] { { 2, 4, 4, 4, 7 }, { 1, 2, 2, 2, 3 }, { 2, 4, 4, 4, 6 } };
+		tiemposOrigen = new int[][] { 
+									{ 2, 4, 4, 4, 7 }, 
+									{ 1, 2, 2, 2, 3 }, 
+									{ 2, 4, 4, 4, 6 } 
+									};
 
 		// Matriz para las distancias que representa moverse del origen propuesto a cada
 		// uno de los destinos
 		// en bici, auto y transporte publico
-		distanciasOrigen = new int[][] { { 308, 616, 616, 616, 924 }, { 240, 480, 480, 480, 720 },
-				{ 420, 840, 840, 840, 1260 } };
+		distanciasOrigen = new int[][] 	{ 
+										{ 308, 616, 616, 616, 924 }, 
+										{ 240, 480, 480, 480, 720 },
+										{ 420, 840, 840, 840, 1260 } 
+										};
 
-		// Definicion recurso a priorizar: costo mínimo total
-		recursoAPriorizar = 0;
+		// Definicion recurso a priorizar: costo mínimo total (1)
+		recursoAPriorizar = 1;
 		// FIN DEFINICION PARAMETROS INCIALES
 	}
 
@@ -193,6 +232,14 @@ public class EstadoAgente extends SearchBasedAgentState {
 
 	public void setposicionActual(int arg) {
 		posicionActual = arg;
+	}
+	
+	public int getposicionPrevia() {
+		return posicionPrevia;
+	}
+
+	public void setposicionPrevia(int arg) {
+		posicionPrevia = arg;
 	}
 
 	public int[][][] getmapaTiempo() {
