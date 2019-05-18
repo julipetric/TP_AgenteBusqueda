@@ -6,7 +6,7 @@ import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
-public class Comprar04 extends SearchAction {
+public class ComprarIJ extends SearchAction {
 
 	EstadoAgente agState;
 	/**
@@ -18,15 +18,15 @@ public class Comprar04 extends SearchAction {
 		EstadoAgente agState = (EstadoAgente) s;
 
 		// Preconditions
-		boolean p1 = (agState.getpreciosProductosComercios()[0][4] != Double.MAX_VALUE);
-		boolean p2 = (agState.getposicionActual() == 0);
-		boolean p3 = (!agState.getlistaProductos().contains(4));
-		boolean p4 = (agState.getlistaProductosDeseados().contains(4));
+		boolean p1 = (agState.getpreciosProductosComercios()[I][J] != Double.MAX_VALUE);
+		boolean p2 = (agState.getposicionActual() == I);
+		boolean p3 = (!agState.getlistaProductos().contains(J));
+		boolean p4 = (agState.getlistaProductosDeseados().contains(J));
 		boolean p5 = (agState.getposicionActual() != -1);
 		boolean p = (p1 && p2 && p3 && p4 && p5);
 
 		if (p) {
-			agState.getlistaProductos().add(4);
+			agState.getlistaProductos().add(J);
 			return agState;
 		}
 		return null;
@@ -37,10 +37,9 @@ public class Comprar04 extends SearchAction {
 	 */
 	@Override
 	public EnvironmentState execute(AgentState ast, EnvironmentState est) {
-		EstadoAmbiente environmentState = (EstadoAmbiente) est;
-		EstadoAgente agState = ((EstadoAgente) ast);
+		this.execute((SearchBasedAgentState) ast);
 
-		return environmentState;
+		return null;
 	}
 
 	/**
@@ -57,11 +56,11 @@ public class Comprar04 extends SearchAction {
 			break;
 		// Costo
 		case 1:
-			p = agState.getpreciosProductosComercios()[0][4];
+			p = agState.getpreciosProductosComercios()[I][J];
 			break;
 		// Relacion costo-tiempo
 		case 2:
-			p = agState.getpreciosProductosComercios()[0][4];
+			p = agState.getpreciosProductosComercios()[I][J];
 			break;
 		}
 		return p;
@@ -73,6 +72,6 @@ public class Comprar04 extends SearchAction {
 	 */
 	@Override
 	public String toString() {
-		return "Comprar";
+		return "ComprarIJ";
 	}
 }
