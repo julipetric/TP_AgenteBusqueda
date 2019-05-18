@@ -8,7 +8,7 @@ import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 /**
  * Represent the internal state of the Agent.
  */
-public class EstadoAgente extends SearchBasedAgentState {
+public class EstadoAgente2 extends SearchBasedAgentState {
 
 	// TODO: Setup Variables
 	// private Other listaProductos;
@@ -25,14 +25,14 @@ public class EstadoAgente extends SearchBasedAgentState {
 	private double precioTransportePublico;
 	private Double[][] preciosProductosComercios;
 
-	public EstadoAgente() {
+	public EstadoAgente2() {
 		mapaTiempo = new int[3][][];
 		mapaDist = new int[3][][];
 		listaProductos = new ArrayList<Integer>();
-		this.initState();
+		this.posicionActual = -1;
 	}
-/*
-	public EstadoAgente(ArrayList<Integer> listaProductosDeseados, int tipoTransporte, int[][] tiemposOrigen,
+
+	public EstadoAgente2(ArrayList<Integer> listaProductosDeseados, int tipoTransporte, int[][] tiemposOrigen,
 			int[][] distOrigen, int recurso) {
 		mapaTiempo = new int[3][][];
 		mapaDist = new int[3][][];
@@ -45,7 +45,6 @@ public class EstadoAgente extends SearchBasedAgentState {
 		this.setdistanciasOrigen(distOrigen);
 		this.setrecursoAPriorizar(recurso);
 	}
-	*/
 
 	/**
 	 * This method clones the state of the agent. It's used in the search process,
@@ -54,7 +53,7 @@ public class EstadoAgente extends SearchBasedAgentState {
 	@Override
 	public SearchBasedAgentState clone() {
 
-		EstadoAgente estado = new EstadoAgente();
+		EstadoAgente2 estado = new EstadoAgente2();
 
 		estado.setlistaProductosDeseados((ArrayList<Integer>) this.getlistaProductosDeseados());
 		estado.settipoTransporte(this.gettipoTransporte());
@@ -96,37 +95,6 @@ public class EstadoAgente extends SearchBasedAgentState {
 	 */
 	@Override
 	public void initState() {
-		//DEFINICION DE PARAMETROS INICIALES PARTICULARES DE UN CASO DE EJECUCION
-    	//Productos deseados: 1, 2 y 5
-    	listaProductosDeseados = new ArrayList<Integer>();
-    	listaProductosDeseados.add(1);
-    	listaProductosDeseados.add(0);
-    	
-    	//Transporte preferido: indefinido
-    	tipoTransporte = 0;
-    	
-    	//Matriz con los tiempos que lleva llegar del origen propuesto a cada uno de los destinos 
-    	//en bici, auto y transporte publico
-    	tiemposOrigen = new int[][] {
-    			{2,	4,	4,	4,	7},
-    			{1,	2,	2,	2,	3},
-    			{2,	4,	4,	4,	6}
-    	};
-    	
-    	//Matriz para las distancias que representa moverse del origen propuesto a cada uno de los destinos 
-    	//en bici, auto y transporte publico
-    	distanciasOrigen = new int[][] {
-    			{308,	616,	616,	616,	924},
-    			{240,	480,	480,	480,	720},
-    			{420,	840,	840,	840,	1260}
-    	};
-    	
-    	//Definicion recurso a priorizar: costo mínimo total
-    	recursoAPriorizar = 0;
-    	//FIN DEFINICION PARAMETROS INCIALES
-    	
-    	this.posicionActual = -1;
-		
 		int[][] mapaTiempoBici = new int[][] { { 0, 4, 7, 7, 9 }, { 4, 0, 2, 4, 7 }, { 7, 2, 0, 2, 7 },
 				{ 7, 4, 2, 0, 4 }, { 9, 7, 7, 4, 0 } };
 
@@ -195,10 +163,10 @@ public class EstadoAgente extends SearchBasedAgentState {
 
 		//boolean b1 = (this.getlistaProductos().
 		ArrayList<Integer> aux1 = (ArrayList<Integer>) this.getlistaProductos().clone();
-		ArrayList<Integer> aux2 = (ArrayList<Integer>) ((EstadoAgente) obj).getlistaProductos().clone();
+		ArrayList<Integer> aux2 = (ArrayList<Integer>) ((EstadoAgente2) obj).getlistaProductos().clone();
 		aux1.removeAll(aux2);
 		boolean b1 = aux1.isEmpty();
-		boolean b2 = (this.getposicionActual() == ((EstadoAgente) obj).getposicionActual());
+		boolean b2 = (this.getposicionActual() == ((EstadoAgente2) obj).getposicionActual());
 		boolean b = (b1 && b2);
 
 		return b;
