@@ -15,6 +15,7 @@ import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgent;
 import frsf.cidisi.faia.solver.search.BreathFirstSearch;
 import frsf.cidisi.faia.solver.search.Search;
+import frsf.cidisi.faia.solver.search.UniformCostSearch;
 
 public class AgenteCompras extends SearchBasedAgent {
 
@@ -62,7 +63,8 @@ public class AgenteCompras extends SearchBasedAgent {
 	@Override
 	public Action selectAction() {
 		// Breath first strategy
-		BreathFirstSearch searchStrategy = new BreathFirstSearch();
+		UniformCostSearch searchStrategy = new UniformCostSearch(new CostFunction());
+		
 //        DepthFirstSearch searchStrategy = new DepthFirstSearch();
 
 		Search searchSolver = new Search(searchStrategy);

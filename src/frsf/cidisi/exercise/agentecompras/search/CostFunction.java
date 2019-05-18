@@ -15,9 +15,13 @@ public class CostFunction implements IStepCostFunction {
 	public double calculateCost(NTree node) {
 
 		if(node.getParent() != null) {
-			double costo = node.getAction().getCost();
-			costo += calculateCost(node.getParent());
-			return costo;
+			if(node.getParent().getAction() == null) {
+				return 0;
+			} else {
+				double costo = node.getAction().getCost();
+				costo += calculateCost(node.getParent());
+				return costo;
+			}
 		} else {
 			return node.getAction().getCost();
 		}

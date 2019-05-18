@@ -16,6 +16,7 @@ public class Comprar00 extends SearchAction {
 	@Override
 	public SearchBasedAgentState execute(SearchBasedAgentState s) {
 		EstadoAgente agState = (EstadoAgente) s;
+		this.agState = (EstadoAgente) s;
 
 		// Preconditions
 		boolean p1 = (agState.getpreciosProductosComercios()[0][0] != Double.MAX_VALUE);
@@ -72,6 +73,8 @@ public class Comprar00 extends SearchAction {
 	 */
 	@Override
 	public String toString() {
-		return "Comprar00";
+		String st = "Comprar00";
+		st += ", Costo: " + this.getCost().toString();
+		return st;
 	}
 }

@@ -128,8 +128,8 @@ public class EstadoAgente extends SearchBasedAgentState {
 		listaProductosDeseados.add(1);
 		listaProductosDeseados.add(0);
 
-		// Transporte preferido: indefinido
-		tipoTransporte = 0;
+		// Transporte preferido: bici
+		tipoTransporte = 1;
 
 		// Matriz con los tiempos que lleva llegar del origen propuesto a cada uno de
 		// los destinos
