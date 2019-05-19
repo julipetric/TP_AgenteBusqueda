@@ -47,7 +47,7 @@ public class Moverse0 extends SearchAction {
 	 */
 	@Override
 	public Double getCost() {
-		//System.out.println("LA POSIC ES: "+agState.getposicionActual());
+		
 		Double t = null;
 		// Primero vemos que el agente no esté en el origen
 		if (agState.getposicionPrevia() != -1) {

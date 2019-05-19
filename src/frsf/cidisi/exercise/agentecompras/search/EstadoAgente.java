@@ -211,14 +211,15 @@ public class EstadoAgente extends SearchBasedAgentState {
 		if (!(obj instanceof EstadoAgente)) {
 			return false;
 		} else {
-			// boolean b1 = (this.getlistaProductos().
 			ArrayList<Integer> aux1 = (ArrayList<Integer>) this.getlistaProductos().clone();
 			Collections.sort(aux1);
 			ArrayList<Integer> aux2 = (ArrayList<Integer>) ((EstadoAgente) obj).getlistaProductos().clone();
 			Collections.sort(aux2);
-			boolean b1 = aux1.equals(aux2);
-			boolean b2 = (this.getposicionActual() == ((EstadoAgente) obj).getposicionActual());
-			boolean b = (b1 && b2);
+
+			boolean b1 = (aux1.size() == aux2.size());
+			boolean b2 = aux1.containsAll(aux2);
+			boolean b3 = (this.getposicionActual() == ((EstadoAgente) obj).getposicionActual());
+			boolean b = (b1 && b2 &&  b3);
 
 			return b;
 		}
