@@ -14,13 +14,14 @@ public class AgenteComprasPerception extends Perception {
 	private int imprevisto;
 	private int cambioCostosTransporte;
 	private int ofertas;
+	private Double[][] ofertasM;
 	
  
 
     public  AgenteComprasPerception() {
-    	imprevisto = UNKNOWN_PERCEPTION;
-    	cambioCostosTransporte = UNKNOWN_PERCEPTION;
-    	ofertas = UNKNOWN_PERCEPTION;
+    	imprevisto = 0;
+    	cambioCostosTransporte = 0;
+    	ofertas = 0;
     }
 
     public AgenteComprasPerception(Agent agent, Environment environment) {
@@ -42,9 +43,23 @@ public class AgenteComprasPerception extends Perception {
     
     @Override
     public String toString() {
-        StringBuffer str = new StringBuffer();
-
-        //TODO: Complete Method
+        //StringBuffer str = new StringBuffer();
+        String str = "";
+        
+        if (this.ofertas==1)
+        	str+="Hay ofertas / ";
+        	else
+        		str+="No hay ofertas / ";
+        
+        if (this.imprevisto==1)
+        	str+="Hay imprevistos / ";
+        	else
+        		str+="No hay imprevistos / ";
+        
+        if (this.cambioCostosTransporte==1)
+        	str+="Hay cambios en los cosos de transporte.";
+        	else
+        		str+="No hay cambios en los costos de transporte.";
 
         return str.toString();
     }
@@ -58,7 +73,7 @@ public class AgenteComprasPerception extends Perception {
      public void setimprevisto(int arg){
         this.imprevisto = arg;
      }
-     public int get (){
+     public int getcambioCostosTransporte(){
         return cambioCostosTransporte;
      }
      public void setcambioCostosTransporte(int arg){
@@ -70,6 +85,14 @@ public class AgenteComprasPerception extends Perception {
      public void setofertas(int arg){
         this.ofertas = arg;
      }
+
+	public Double[][] getOfertasM() {
+		return ofertasM;
+	}
+
+	public void setOfertasM(Double[][] ofertasM) {
+		this.ofertasM = ofertasM;
+	}
 	
    
 }

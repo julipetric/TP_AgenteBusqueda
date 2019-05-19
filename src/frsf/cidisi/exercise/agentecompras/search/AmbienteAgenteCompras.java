@@ -26,7 +26,45 @@ public class AmbienteAgenteCompras extends Environment {
         // Create a new perception to return
          AgenteComprasPerception perception = new AgenteComprasPerception();
 		
-		//TODO : Set the perceptions sensors
+         //int n= (int) (Math.random()*10);
+         //System.out.println("EL RANDOM VALE:"+n);
+         
+         //Seteado en 0 para probar ofertas
+         int n=0;
+         if (n==0 || n==1) {
+        	 //Hay un 20% de probabilidad de que haya ofertas.
+        	 perception.setofertas(1);
+        	 perception.setcambioCostosTransporte(0);
+        	 perception.setimprevisto(0);
+        	 
+        	 //El valor 1.0 representa que no hay ofertas de ese producto, en el comercio correspondiente.
+           	 Double[][] matriz = new Double[][] 	{ 
+													{ -0.5, -0.15, -0.5, 1.0, 1.0, 1.0 },
+													{ 1.0, -0.5, 1.0, -0.2, 1.0, 1.0 },
+													{ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 },
+													{ 1.0, -0.3, -0.2, 1.0, -0.15, -0.1 },
+													{ 1.0, 1.0, 1.0, 1.0, -0.4, 1.0 } 
+													};	
+			perception.setOfertasM(matriz);
+         }
+         else if (n==2) {
+        	 //Hay un 10% de probabilidad de que haya imprevistos.
+        	 perception.setofertas(0);
+        	 perception.setcambioCostosTransporte(0);
+        	 perception.setimprevisto(1);
+         }
+         else if (n==3) {
+        	 //Hay un 10% de probabilidad de que haya cambios en los costos de transporte.
+        	 perception.setofertas(0);
+        	 perception.setcambioCostosTransporte(1);
+        	 perception.setimprevisto(0);
+         }
+         else {
+        	 //Hay un 60% de probabilidad de que no pase nada.
+        	 perception.setofertas(0);
+        	 perception.setcambioCostosTransporte(0);
+        	 perception.setimprevisto(0);
+         }
         
         // Return the perception
         return perception;

@@ -2,7 +2,6 @@ package frsf.cidisi.exercise.agentecompras.search;
 
 import java.util.ArrayList;
 import java.util.Collections;
-
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 
@@ -69,9 +68,22 @@ public class EstadoAgente extends SearchBasedAgentState {
 	@Override
 	public void updateState(Perception p) {
 
-		// TODO: VER QUE ONDA ACÁ SI PUEDE ESTAR VACÍO
+    	AgenteComprasPerception percepcion = (AgenteComprasPerception) p;
+    	
+    	int ofertasPercibida = percepcion.getofertas();
+    	//int imprevistosPercibida = percepcion.getimprevisto();
+    	//int cambioCostosTransportePercibida = percepcion.getcambioCostosTransporte();
+    	
+    	if (ofertasPercibida==1) {
+    		
+    		for (int i=0; i<2; i++) 
+    			for (int j=0; j<6; j++) 
+    				if (percepcion.getOfertasM()[i][j] != 1.0) {
+    					this.preciosProductosComercios[i][j] = 	this.preciosProductosComercios[i][j]
+    															+this.preciosProductosComercios[i][j]*percepcion.getOfertasM()[i][j];
+    				}			
+    	}
 	}
-
 	/**
 	 * This method is optional, and sets the initial state of the agent.
 	 */
@@ -148,11 +160,13 @@ public class EstadoAgente extends SearchBasedAgentState {
 		precioNafta = 45 / 8;
 		precioTransportePublico = 0.5 * precioNafta;
 
-		preciosProductosComercios = new Double[][] { { 30.0, 70.0, 110.0, 20.0, Double.MAX_VALUE, 188.0 },
-				{ 25.0, 66.0, Double.MAX_VALUE, 22.0, 50.0, 183.0 },
-				{ 27.0, Double.MAX_VALUE, 125.0, 18.0, 54.0, 170.0 },
-				{ Double.MAX_VALUE, 81.0, 120.0, 25.0, 52.0, 190.0 },
-				{ 24.0, 75.0, 130.0, 22.0, 44.0, Double.MAX_VALUE } };
+		preciosProductosComercios = new Double[][] 	{ 
+													{ 30.0, 70.0, 110.0, 20.0, Double.MAX_VALUE, 188.0 },
+													{ 25.0, 66.0, Double.MAX_VALUE, 22.0, 50.0, 183.0 },
+													{ 27.0, Double.MAX_VALUE, 125.0, 18.0, 54.0, 170.0 },
+													{ Double.MAX_VALUE, 81.0, 120.0, 25.0, 52.0, 190.0 },
+													{ 24.0, 75.0, 130.0, 22.0, 44.0, Double.MAX_VALUE } 
+													};
 
 		// DEFINICION DE PARAMETROS INICIALES INGRESADOS POR EL USUARIO
 		// Productos deseados: 1, 2 y 5
@@ -183,7 +197,7 @@ public class EstadoAgente extends SearchBasedAgentState {
 
 		// Definicion recurso a priorizar: tiempo (0) 
 										//costo mínimo total (1)
-		recursoAPriorizar = 0;
+		recursoAPriorizar = 1;
 		// FIN DEFINICION PARAMETROS INCIALES
 	}
 
