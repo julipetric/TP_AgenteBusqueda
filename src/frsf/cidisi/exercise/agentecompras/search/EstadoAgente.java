@@ -145,7 +145,7 @@ public class EstadoAgente extends SearchBasedAgentState {
 		// Las distancias estan expresadas en metros, por lo que para calcular los
 		// costos de combustible se
 		// multiplicará costoNafta por los metros recorridos.
-		precioNafta = 45 / 8; // 8000
+		precioNafta = 45 / 8;
 		precioTransportePublico = 0.5 * precioNafta;
 
 		preciosProductosComercios = new Double[][] { { 30.0, 70.0, 110.0, 20.0, Double.MAX_VALUE, 188.0 },
@@ -181,8 +181,9 @@ public class EstadoAgente extends SearchBasedAgentState {
 										{ 420, 840, 840, 840, 1260 } 
 										};
 
-		// Definicion recurso a priorizar: costo mínimo total (1)
-		recursoAPriorizar = 1;
+		// Definicion recurso a priorizar: tiempo (0) 
+										//costo mínimo total (1)
+		recursoAPriorizar = 0;
 		// FIN DEFINICION PARAMETROS INCIALES
 	}
 
