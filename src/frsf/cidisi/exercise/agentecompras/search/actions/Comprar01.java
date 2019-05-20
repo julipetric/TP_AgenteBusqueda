@@ -76,4 +76,16 @@ public class Comprar01 extends SearchAction {
 		st += ", Costo: " + this.getCost().toString();
 		return st;
 	}
+
+	@Override
+	public void setagState(SearchBasedAgentState agentState) {
+		this.agState = (EstadoAgente) agentState;
+		
+	}
+
+	@Override
+	public SearchBasedAgentState getagState() {
+		return agState;
+	}
+
 }

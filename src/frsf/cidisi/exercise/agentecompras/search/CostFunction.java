@@ -19,7 +19,8 @@ public class CostFunction implements IStepCostFunction {
 		 * calculateCost(node.getParent()); return costo; } } else { return
 		 * node.getAction().getCost(); }
 		 */
-
+		((EstadoAgente) node.getAction().getagState()).setpreciosProductosComercios(
+				((EstadoAgente) node.getParent().getAgentState()).getpreciosProductosComercios());
 		return node.getAction().getCost();
 	}
 }

@@ -182,4 +182,16 @@ public class Moverse0 extends SearchAction {
 		st += ", Costo: " + this.getCost().toString();
 		return st;
 	}
+
+	@Override
+	public SearchBasedAgentState getagState() {
+		return agState;
+	}
+
+	@Override
+	public void setagState(SearchBasedAgentState agentState) {
+		this.agState = (EstadoAgente) agentState;
+		
+	}
+
 }
