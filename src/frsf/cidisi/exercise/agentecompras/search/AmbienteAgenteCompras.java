@@ -26,11 +26,8 @@ public class AmbienteAgenteCompras extends Environment {
         // Create a new perception to return
          AgenteComprasPerception perception = new AgenteComprasPerception();
 		
-         //int n= (int) (Math.random()*10);
-         //System.out.println("EL RANDOM VALE:"+n);
-         
-         //Seteado en 0 para probar ofertas
-         int n=3;
+         int n= (int) (Math.random()*10);
+
          if (n==0 || n==1) {
         	 //Hay un 20% de probabilidad de que haya ofertas.
         	 perception.setofertas(1);

@@ -202,8 +202,8 @@ public class EstadoAgente extends SearchBasedAgentState {
 		// DEFINICION DE PARAMETROS INICIALES INGRESADOS POR EL USUARIO
 		// Productos deseados: 1, 2 y 5
 		listaProductosDeseados = new ArrayList<Integer>();
-		listaProductosDeseados.add(1);
 		listaProductosDeseados.add(0);
+		listaProductosDeseados.add(3);
 
 		// Transporte preferido: auto (2)
 		tipoTransporte = 2;
