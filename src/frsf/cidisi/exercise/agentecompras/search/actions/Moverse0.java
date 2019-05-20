@@ -140,6 +140,7 @@ public class Moverse0 extends SearchAction {
 				case 2:
 					t = (Double) (double) agState.getdistanciasOrigen()[1][0];
 					t = t * agState.getprecioNafta();
+    				System.out.println("COSTO DE MOVERSE?: " + t);
 					break;
 				case 3:
 					t = (Double) (double) agState.getdistanciasOrigen()[2][0];

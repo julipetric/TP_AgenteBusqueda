@@ -15,8 +15,13 @@ public class AgenteComprasPerception extends Perception {
 	private int cambioCostosTransporte;
 	private int ofertas;
 	private Double[][] ofertasM;
+	private Double[][][] imprevistosDistM;
+	private Double [][][] imprevistosTiempoM;
+	private Double [][] imprevistosDistOrigenM;
+	private Double [][] imprevistosTiempoOrigenM;
+	private double cambioCostoNafta;
+	private double cambioCostoTransportePublico;
 	
- 
 
     public  AgenteComprasPerception() {
     	imprevisto = 0;
@@ -57,7 +62,7 @@ public class AgenteComprasPerception extends Perception {
         		str+="No hay imprevistos / ";
         
         if (this.cambioCostosTransporte==1)
-        	str+="Hay cambios en los cosos de transporte.";
+        	str+="Hay cambios en los costos de transporte.";
         	else
         		str+="No hay cambios en los costos de transporte.";
 
@@ -93,6 +98,55 @@ public class AgenteComprasPerception extends Perception {
 	public void setOfertasM(Double[][] ofertasM) {
 		this.ofertasM = ofertasM;
 	}
+
+	public Double[][][] getImprevistosDistM() {
+		return imprevistosDistM;
+	}
+
+	public void setImprevistosDistM(Double[][][] imprevistosDistM) {
+		this.imprevistosDistM = imprevistosDistM;
+	}
+
+	public Double [][][] getImprevistosTiempoM() {
+		return imprevistosTiempoM;
+	}
+
+	public void setImprevistosTiempoM(Double [][][] imprevistosTiempoM) {
+		this.imprevistosTiempoM = imprevistosTiempoM;
+	}
+
+	public Double [][] getImprevistosDistOrigenM() {
+		return imprevistosDistOrigenM;
+	}
+
+	public void setImprevistosDistOrigenM(Double [][] imprevistosDistOrigenM) {
+		this.imprevistosDistOrigenM = imprevistosDistOrigenM;
+	}
+
+	public Double [][] getImprevistosTiempoOrigenM() {
+		return imprevistosTiempoOrigenM;
+	}
+
+	public void setImprevistosTiempoOrigenM(Double [][] imprevistosTiempoOrigenM) {
+		this.imprevistosTiempoOrigenM = imprevistosTiempoOrigenM;
+	}
+
+	public double getCambioCostoNafta() {
+		return cambioCostoNafta;
+	}
+
+	public void setCambioCostoNafta(double cambioCostoNafta) {
+		this.cambioCostoNafta = cambioCostoNafta;
+	}
+
+	public double getCambioCostoTransportePublico() {
+		return cambioCostoTransportePublico;
+	}
+
+	public void setCambioCostoTransportePublico(double cambioCostoTransportePublico) {
+		this.cambioCostoTransportePublico = cambioCostoTransportePublico;
+	}
+
 	
    
 }

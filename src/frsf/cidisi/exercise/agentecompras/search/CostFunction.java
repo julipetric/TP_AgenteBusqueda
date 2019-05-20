@@ -21,6 +21,25 @@ public class CostFunction implements IStepCostFunction {
 		 */
 		((EstadoAgente) node.getAction().getagState()).setpreciosProductosComercios(
 				((EstadoAgente) node.getParent().getAgentState()).getpreciosProductosComercios());
+		
+		((EstadoAgente) node.getAction().getagState()).setmapaDist(
+				((EstadoAgente) node.getParent().getAgentState()).getmapaDist());
+		
+		((EstadoAgente) node.getAction().getagState()).setmapaTiempo(
+				((EstadoAgente) node.getParent().getAgentState()).getmapaTiempo());
+		
+		((EstadoAgente) node.getAction().getagState()).setdistanciasOrigen(
+				((EstadoAgente) node.getParent().getAgentState()).getdistanciasOrigen());
+		
+		((EstadoAgente) node.getAction().getagState()).settiemposOrigen(
+				((EstadoAgente) node.getParent().getAgentState()).gettiemposOrigen());
+		
+		((EstadoAgente) node.getAction().getagState()).setprecioNafta(
+				((EstadoAgente) node.getParent().getAgentState()).getprecioNafta());
+		
+		((EstadoAgente) node.getAction().getagState()).setprecioTransportePublico(
+				((EstadoAgente) node.getParent().getAgentState()).getprecioTransportePublico());
+		
 		return node.getAction().getCost();
 	}
 }
