@@ -81,7 +81,7 @@ public class Moverse1 extends SearchAction {
 					t = t * agState.getprecioNafta();
 					break;
 				case 3:
-					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionPrevia()][1];
+					t = (Double) (double) agState.getmapaDist()[2][agState.getposicionPrevia()][1];
 					t = t * agState.getprecioTransportePublico();
 					break;
 				}
@@ -100,7 +100,7 @@ public class Moverse1 extends SearchAction {
 					t = t / (Double) (double) agState.getmapaTiempo()[1][agState.getposicionPrevia()][1];
 					break;
 				case 3:
-					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionPrevia()][1];
+					t = (Double) (double) agState.getmapaDist()[2][agState.getposicionPrevia()][1];
 					t = t * agState.getprecioTransportePublico();
 					t = t / (Double) (double) agState.getmapaTiempo()[2][agState.getposicionPrevia()][1];
 					break;

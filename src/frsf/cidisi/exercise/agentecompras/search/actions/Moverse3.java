@@ -6,7 +6,7 @@ import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
-public class Moverse0 extends SearchAction {
+public class Moverse3 extends SearchAction {
 	
 	EstadoAgente agState;
 	
@@ -20,11 +20,11 @@ public class Moverse0 extends SearchAction {
 		this.agState = (EstadoAgente) s;
 
 		// PreConditions
-		boolean p = (agState.getposicionActual() != 0);
+		boolean p = (agState.getposicionActual() != 3);
 
 		if (p) {
 			agState.setposicionPrevia(agState.getposicionActual());
-			agState.setposicionActual(0);
+			agState.setposicionActual(3);
 
 			return agState;
 		}
@@ -60,13 +60,13 @@ public class Moverse0 extends SearchAction {
 				switch (agState.gettipoTransporte()) {
 				// Bici
 				case 1:
-					t = (Double) (double) agState.getmapaTiempo()[0][agState.getposicionPrevia()][0];
+					t = (Double) (double) agState.getmapaTiempo()[0][agState.getposicionPrevia()][3];
 					break;
 				case 2:
-					t = (Double) (double) agState.getmapaTiempo()[1][agState.getposicionPrevia()][0];
+					t = (Double) (double) agState.getmapaTiempo()[1][agState.getposicionPrevia()][3];
 					break;
 				case 3:
-					t = (Double) (double) agState.getmapaTiempo()[2][agState.getposicionPrevia()][0];
+					t = (Double) (double) agState.getmapaTiempo()[2][agState.getposicionPrevia()][3];
 					break;
 				}
 				break;
@@ -79,11 +79,11 @@ public class Moverse0 extends SearchAction {
 					break;
 				// Auto
 				case 2:
-					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionPrevia()][0];
+					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionPrevia()][3];
 					t = t * agState.getprecioNafta();
 					break;
 				case 3:
-					t = (Double) (double) agState.getmapaDist()[2][agState.getposicionPrevia()][0];
+					t = (Double) (double) agState.getmapaDist()[2][agState.getposicionPrevia()][3];
 					t = t * agState.getprecioTransportePublico();
 					break;
 				}
@@ -97,14 +97,14 @@ public class Moverse0 extends SearchAction {
 					break;
 				// Auto
 				case 2:
-					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionPrevia()][0];
+					t = (Double) (double) agState.getmapaDist()[1][agState.getposicionPrevia()][3];
 					t = t * agState.getprecioNafta();
-					t = t / (Double) (double) agState.getmapaTiempo()[1][agState.getposicionPrevia()][0];
+					t = t / (Double) (double) agState.getmapaTiempo()[1][agState.getposicionPrevia()][3];
 					break;
 				case 3:
-					t = (Double) (double) agState.getmapaDist()[2][agState.getposicionPrevia()][0];
+					t = (Double) (double) agState.getmapaDist()[2][agState.getposicionPrevia()][3];
 					t = t * agState.getprecioTransportePublico();
-					t = t / (Double) (double) agState.getmapaTiempo()[2][agState.getposicionPrevia()][0];
+					t = t / (Double) (double) agState.getmapaTiempo()[2][agState.getposicionPrevia()][3];
 					break;
 				}
 				break;
@@ -119,13 +119,13 @@ public class Moverse0 extends SearchAction {
 				switch (agState.gettipoTransporte()) {
 				// Bici
 				case 1:
-					t = (Double) (double) agState.gettiemposOrigen()[0][0];
+					t = (Double) (double) agState.gettiemposOrigen()[0][3];
 					break;
 				case 2:
-					t = (Double) (double) agState.gettiemposOrigen()[1][0];
+					t = (Double) (double) agState.gettiemposOrigen()[1][3];
 					break;
 				case 3:
-					t = (Double) (double) agState.gettiemposOrigen()[2][0];
+					t = (Double) (double) agState.gettiemposOrigen()[2][3];
 					break;
 				}
 				break;
@@ -138,12 +138,11 @@ public class Moverse0 extends SearchAction {
 					break;
 				// Auto
 				case 2:
-					t = (Double) (double) agState.getdistanciasOrigen()[1][0];
+					t = (Double) (double) agState.getdistanciasOrigen()[1][3];
 					t = t * agState.getprecioNafta();
-    				System.out.println("COSTO DE MOVERSE?: " + t);
 					break;
 				case 3:
-					t = (Double) (double) agState.getdistanciasOrigen()[2][0];
+					t = (Double) (double) agState.getdistanciasOrigen()[2][3];
 					t = t * agState.getprecioTransportePublico();
 					break;
 				}
@@ -157,14 +156,14 @@ public class Moverse0 extends SearchAction {
 					break;
 				// Auto
 				case 2:
-					t = (Double) (double) agState.getdistanciasOrigen()[1][0];
+					t = (Double) (double) agState.getdistanciasOrigen()[1][3];
 					t = t * agState.getprecioNafta();
-					t = t / (Double) (double) agState.gettiemposOrigen()[1][0];
+					t = t / (Double) (double) agState.gettiemposOrigen()[1][3];
 					break;
 				case 3:
-					t = (Double) (double) agState.getdistanciasOrigen()[2][0];
+					t = (Double) (double) agState.getdistanciasOrigen()[2][3];
 					t = t * agState.getprecioTransportePublico();
-					t = t / (Double) (double) agState.gettiemposOrigen()[2][0];
+					t = t / (Double) (double) agState.gettiemposOrigen()[2][3];
 					break;
 				}
 				break;
