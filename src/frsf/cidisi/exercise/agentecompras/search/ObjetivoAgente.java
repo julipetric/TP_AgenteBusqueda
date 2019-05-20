@@ -12,10 +12,10 @@ public class ObjetivoAgente extends GoalTest {
 
     	EstadoAgente e = (EstadoAgente) agentState;
     	
-        if  (e.getlistaProductos().containsAll(e.getlistaProductosDeseados())) //(listaProductos=listaProductosDeseada)
+        if  (e.getlistaProductos().size()==e.getlistaProductosDeseados().size() && e.getlistaProductos().containsAll(e.getlistaProductosDeseados()) && e.getposicionActual()== -1) //(listaProductos=listaProductosDeseada) 
         	{
-            return true;
+            	return true;
         	}
-        return false;
-	}
+        		return false;
+			}
 }

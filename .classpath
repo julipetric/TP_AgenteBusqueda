@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry exported="true" kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER"/>
 	<classpathentry kind="src" path="src"/>
-	<classpathentry combineaccessrules="false" kind="src" path="/ar.edu.utn.frsf.cidisi.faia"/>
+	<classpathentry kind="lib" path="jmathlink.jar"/>
+	<classpathentry kind="lib" path="jpl.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

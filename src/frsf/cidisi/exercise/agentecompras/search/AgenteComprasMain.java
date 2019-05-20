@@ -8,7 +8,7 @@ import frsf.cidisi.faia.simulator.SearchBasedAgentSimulator;
 public class AgenteComprasMain {
 
     public static void main(String[] args) throws PrologConnectorException {
-        
+
     	AgenteCompras agent = new AgenteCompras();
     	
         AmbienteAgenteCompras environment = new AmbienteAgenteCompras();
@@ -17,5 +17,4 @@ public class AgenteComprasMain {
         
         simulator.start();
     }
-
 }

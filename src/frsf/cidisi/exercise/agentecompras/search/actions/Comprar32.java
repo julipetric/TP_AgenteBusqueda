@@ -6,27 +6,28 @@ import frsf.cidisi.faia.agent.search.SearchBasedAgentState;
 import frsf.cidisi.faia.state.AgentState;
 import frsf.cidisi.faia.state.EnvironmentState;
 
-public class ComprarIJ extends SearchAction {
+public class Comprar32 extends SearchAction {
 
 	EstadoAgente agState;
 	/**
-	 * This method updates a tree node state when the search process is running. It
+	 * This method updates a tree node state when the search process is running. 3t
 	 * does not updates the real world state.
 	 */
 	@Override
 	public SearchBasedAgentState execute(SearchBasedAgentState s) {
 		EstadoAgente agState = (EstadoAgente) s;
+		this.agState = (EstadoAgente) s;
 
 		// Preconditions
-		boolean p1 = (agState.getpreciosProductosComercios()[I][J] != Double.MAX_VALUE);
-		boolean p2 = (agState.getposicionActual() == I);
-		boolean p3 = (!agState.getlistaProductos().contains(J));
-		boolean p4 = (agState.getlistaProductosDeseados().contains(J));
+		boolean p1 = (agState.getpreciosProductosComercios()[3][2] != Double.MAX_VALUE);
+		boolean p2 = (agState.getposicionActual() == 3);
+		boolean p3 = (!agState.getlistaProductos().contains(2));
+		boolean p4 = (agState.getlistaProductosDeseados().contains(2));
 		boolean p5 = (agState.getposicionActual() != -1);
 		boolean p = (p1 && p2 && p3 && p4 && p5);
 
 		if (p) {
-			agState.getlistaProductos().add(J);
+			agState.getlistaProductos().add(2);
 			return agState;
 		}
 		return null;
@@ -56,11 +57,11 @@ public class ComprarIJ extends SearchAction {
 			break;
 		// Costo
 		case 1:
-			p = agState.getpreciosProductosComercios()[I][J];
+			p = agState.getpreciosProductosComercios()[3][2];
 			break;
 		// Relacion costo-tiempo
 		case 2:
-			p = agState.getpreciosProductosComercios()[I][J];
+			p = agState.getpreciosProductosComercios()[3][2];
 			break;
 		}
 		return p;
@@ -72,6 +73,19 @@ public class ComprarIJ extends SearchAction {
 	 */
 	@Override
 	public String toString() {
-		return "ComprarIJ";
+		String st = "Comprar32";
+		st += ", Costo: " + this.getCost().toString();
+		return st;
+	}
+
+	@Override
+	public SearchBasedAgentState getagState() {
+		return agState;
+	}
+
+	@Override
+	public void setagState(SearchBasedAgentState agentState) {
+		this.agState = (EstadoAgente) agentState;
+		
 	}
 }
