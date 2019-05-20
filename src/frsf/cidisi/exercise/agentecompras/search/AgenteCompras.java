@@ -44,6 +44,7 @@ import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.Problem;
 import frsf.cidisi.faia.agent.search.SearchAction;
 import frsf.cidisi.faia.agent.search.SearchBasedAgent;
+import frsf.cidisi.faia.solver.search.AStarSearch;
 import frsf.cidisi.faia.solver.search.BreathFirstSearch;
 import frsf.cidisi.faia.solver.search.DepthFirstSearch;
 import frsf.cidisi.faia.solver.search.Search;
@@ -115,6 +116,15 @@ public class AgenteCompras extends SearchBasedAgent {
 		
 		// UniformCostStrategy:
 		UniformCostSearch searchStrategy = new UniformCostSearch(new CostFunction());
+		
+		//A Star Search:
+		//IStepCostFunction cost = new CostFunction();
+        //IEstimatedCostFunction heuristic = new Heuristic();
+        //AStarSearch strategy = new AStarSearch(cost, heuristic);
+		
+		//Greedy Search:
+	    //IEstimatedCostFunction heuristic = new Heuristic();
+	    //GreedySearch strategy = new GreedySearch(heuristic);
 
 		Search searchSolver = new Search(searchStrategy);
 
