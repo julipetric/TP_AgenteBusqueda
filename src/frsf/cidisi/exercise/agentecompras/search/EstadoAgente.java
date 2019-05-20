@@ -203,7 +203,10 @@ public class EstadoAgente extends SearchBasedAgentState {
 		// Productos deseados: 1, 2 y 5
 		listaProductosDeseados = new ArrayList<Integer>();
 		listaProductosDeseados.add(0);
+		listaProductosDeseados.add(1);
 		listaProductosDeseados.add(3);
+		listaProductosDeseados.add(4);
+		listaProductosDeseados.add(5);
 
 		// Transporte preferido: auto (2)
 		tipoTransporte = 2;

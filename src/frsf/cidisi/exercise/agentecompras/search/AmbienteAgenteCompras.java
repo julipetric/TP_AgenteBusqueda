@@ -34,13 +34,12 @@ public class AmbienteAgenteCompras extends Environment {
         	 perception.setcambioCostosTransporte(0);
         	 perception.setimprevisto(0);
         	 
-        	 //El valor 1.0 representa que no hay ofertas de ese producto, en el comercio correspondiente.
            	 Double[][] matriz = new Double[][] 	{ 
-													{ -0.5, -0.15, -0.5, 1.0, 1.0, 1.0 },
-													{ 1.0, -0.5, 1.0, -0.2, 1.0, 1.0 },
-													{ 1.0, 1.0, 1.0, 1.0, 1.0, 1.0 },
-													{ 1.0, -0.3, -0.2, 1.0, -0.15, -0.1 },
-													{ 1.0, 1.0, 1.0, 1.0, -0.4, 1.0 } 
+													{ -0.5, -0.15, -0.5, 0.0, 0.0, 0.0 },
+													{ 0.0, -0.5, 0.0, -0.2, 0.0, 0.0 },
+													{ 0.0, 0.0, 0.0, 0.0, 0.0, 0.0 },
+													{ 0.0, -0.3, -0.2, 0.0, -0.15, -0.1 },
+													{ 0.0, 0.0, 0.0, 0.0, -0.4, 0.0 } 
 													};	
 			perception.setOfertasM(matriz);
          }
