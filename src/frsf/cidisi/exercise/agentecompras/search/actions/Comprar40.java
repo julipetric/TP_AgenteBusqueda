@@ -73,7 +73,7 @@ public class Comprar40 extends SearchAction {
 	 */
 	@Override
 	public String toString() {
-		String st = "Comprar00";
+		String st = "Comprar40";
 		st += ", Costo: " + this.getCost().toString();
 		return st;
 	}

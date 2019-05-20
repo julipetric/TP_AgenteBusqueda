@@ -38,6 +38,7 @@ import frsf.cidisi.exercise.agentecompras.search.actions.Moverse1;
 import frsf.cidisi.exercise.agentecompras.search.actions.Moverse2;
 import frsf.cidisi.exercise.agentecompras.search.actions.Moverse3;
 import frsf.cidisi.exercise.agentecompras.search.actions.Moverse4;
+import frsf.cidisi.exercise.agentecompras.search.actions.MoverseMenos1;
 import frsf.cidisi.faia.agent.Action;
 import frsf.cidisi.faia.agent.Perception;
 import frsf.cidisi.faia.agent.search.Problem;
@@ -66,7 +67,7 @@ public class AgenteCompras extends SearchBasedAgent {
 		operators.addElement(new Moverse2()); 
 		operators.addElement(new Moverse3());
 		operators.addElement(new Moverse4());
-		 
+		operators.addElement(new MoverseMenos1());
 		operators.addElement(new Comprar00());
 		operators.addElement(new Comprar01());
 		operators.addElement(new Comprar02()); 

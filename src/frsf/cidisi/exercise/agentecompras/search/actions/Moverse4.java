@@ -178,7 +178,7 @@ public class Moverse4 extends SearchAction {
 	 */
 	@Override
 	public String toString() {
-		String st = "Moverse0";
+		String st = "Moverse4";
 		st += ", Costo: " + this.getCost().toString();
 		return st;
 	}
